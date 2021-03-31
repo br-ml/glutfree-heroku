@@ -21,6 +21,10 @@ public class LogAspect {
     public void detailsPointcut(){};
 
     @After("detailsPointcut()")
+
+
+
+
     public void afterAdvice(JoinPoint joinPoint){
 
         Object[] args = joinPoint.getArgs();
