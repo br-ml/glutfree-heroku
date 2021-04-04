@@ -1,5 +1,7 @@
 package eu.glutfree.glutfree.service.impl;
 
+import eu.glutfree.glutfree.exceptions.ReceiptNotFoundException;
+import eu.glutfree.glutfree.exceptions.UserNotFoundException;
 import eu.glutfree.glutfree.model.entities.ReceiptEntity;
 import eu.glutfree.glutfree.model.service.ReceiptAddServiceModel;
 import eu.glutfree.glutfree.model.view.FeedbackViewModel;
@@ -63,6 +65,14 @@ public class ReceiptServiceImpl implements ReceiptService {
     @Override
     public void delete(Long id) {
         receiptRepository.deleteById(id);
+
+    }
+
+    @Override
+    public void deleteReceipt(Long id) {
+        ReceiptEntity lessonEntity = this.receiptRepository.findById(id).orElseThrow(() -> new ReceiptNotFoundException("This receipt does not exist in the database!"));
+        this.receiptRepository.delete(lessonEntity);
+
 
     }
 

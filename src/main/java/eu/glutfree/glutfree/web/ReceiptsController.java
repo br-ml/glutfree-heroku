@@ -71,7 +71,7 @@ public class ReceiptsController {
   public String delete(@PathVariable Long id,
                        Model model) {
 
-    receiptService.delete(id);
+    receiptService.deleteReceipt(id);
 
     return "redirect:/receipt/";
   }

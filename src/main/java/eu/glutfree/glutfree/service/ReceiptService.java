@@ -15,6 +15,8 @@ public interface ReceiptService {
 
     void delete(Long id);
 
+    void deleteReceipt(Long id);
+
 }
 
 //    List<StudentViewModel> findAll();

@@ -1,5 +1,8 @@
 package eu.glutfree.glutfree.service.impl;
 
+import eu.glutfree.glutfree.exceptions.RoleNotFoundException;
+import eu.glutfree.glutfree.exceptions.StoreNotFoundException;
+import eu.glutfree.glutfree.exceptions.UserNotFoundException;
 import eu.glutfree.glutfree.model.entities.UserEntity;
 import eu.glutfree.glutfree.model.entities.UserRoleEntity;
 import eu.glutfree.glutfree.model.entities.enums.UserRoleEnum;
@@ -12,6 +15,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -132,9 +136,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public void changeRole(String username, String role) {
         boolean hasRole = false;
-        UserEntity userEntity = userRepository.findByUsername(username).orElse(null);
+        UserEntity userEntity = userRepository.findByUsername(username).orElseThrow(() -> new UserNotFoundException("This User does not exist in the database!"));
         List<UserRoleEntity> userRolls = userEntity.getRoles();
-        UserRoleEntity userRoleEntity = this.userRoleRepository.findByRole(UserRoleEnum.valueOf(role)).orElse(null);
+        UserRoleEntity userRoleEntity = this.userRoleRepository.findByRole(UserRoleEnum.valueOf(role)).orElseThrow(() -> new RoleNotFoundException("This Role does not exist in the database!"));
         for (UserRoleEntity userRoll : userRolls) {
             if (userRoll.getRole().equals(UserRoleEnum.valueOf(role))) {
                 hasRole = true;
@@ -150,10 +154,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteRole(String username, String role) {
         boolean hasRole = false;
-        UserEntity userEntity = userRepository.findByUsername(username).orElse(null);
+        UserEntity userEntity = userRepository.findByUsername(username).orElseThrow(() -> new UserNotFoundException("This User does not exist in the database!"));
         List<UserRoleEntity> userRolls = userEntity.getRoles();
         List<UserRoleEntity> newUserRolls = new ArrayList<>();
-        UserRoleEntity userRoleEntity = this.userRoleRepository.findByRole(UserRoleEnum.valueOf(role)).orElse(null);
+        UserRoleEntity userRoleEntity = this.userRoleRepository.findByRole(UserRoleEnum.valueOf(role)).orElseThrow(() -> new RoleNotFoundException("This Role does not exist in the database!"));
         for (UserRoleEntity userRoll : userRolls) {
             if (userRoll.getRole().equals(UserRoleEnum.valueOf(role))) {
                 hasRole = true;
