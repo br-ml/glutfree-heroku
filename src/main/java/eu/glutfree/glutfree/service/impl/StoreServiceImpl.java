@@ -1,5 +1,6 @@
 package eu.glutfree.glutfree.service.impl;
 
+import eu.glutfree.glutfree.exceptions.StoreNotFoundException;
 import eu.glutfree.glutfree.model.entities.StoreEntity;
 import eu.glutfree.glutfree.model.service.StoreAddServiceModel;
 import eu.glutfree.glutfree.repository.StoreRepository;
@@ -41,7 +42,7 @@ public class StoreServiceImpl implements StoreService {
 
     @Override
     public StoreEntity findStoreByName(String name) {
-        return storeRepository.findByName(name).orElse(null);
+        return storeRepository.findByName(name).orElseThrow(() -> new StoreNotFoundException("This Store does not exist in the database!"));
     }
 
     @Override

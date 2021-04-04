@@ -14,7 +14,8 @@ public class FeedbackEntity extends BaseEntity{
     private int score;
     private String feedbackText;
     private String webSiteUrl;
-    private String logoPicture;
+    //Logo Image
+    private String urlToPic;
     private TypeOfPlaceEnums typeOfPlace;
     private UserEntity user;
 
@@ -54,12 +55,12 @@ public class FeedbackEntity extends BaseEntity{
         this.webSiteUrl = webSiteUrl;
     }
 
-    public String getLogoPicture() {
-        return logoPicture;
+    public String getUrlToPic() {
+        return urlToPic;
     }
 
-    public void setLogoPicture(String logoPicture) {
-        this.logoPicture = logoPicture;
+    public void setUrlToPic(String urlToPic) {
+        this.urlToPic = urlToPic;
     }
 
     public TypeOfPlaceEnums getTypeOfPlace() {

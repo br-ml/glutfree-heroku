@@ -9,6 +9,7 @@ public class UserUpdateBindingModel {
     private String firstName;
     private String secondName;
     private RegionEnums region;
+//    private Boolean isProfileUpdated;
 
 
     public UserUpdateBindingModel() {
@@ -37,4 +38,12 @@ public class UserUpdateBindingModel {
     public void setRegion(RegionEnums region) {
         this.region = region;
     }
+
+//    public Boolean getProfileUpdated() {
+//        return isProfileUpdated;
+//    }
+//
+//    public void setProfileUpdated(Boolean profileUpdated) {
+//        isProfileUpdated = profileUpdated;
+//    }
 }

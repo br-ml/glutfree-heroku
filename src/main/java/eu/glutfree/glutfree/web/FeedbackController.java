@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.io.IOException;
 
 
 @Controller
@@ -44,7 +45,7 @@ public class FeedbackController {
     @PostMapping("/add")
     public String addConfirm(@Valid FeedbackAddBindingModel feedbackAddBindingModel,
                              BindingResult bindingResult,
-                             RedirectAttributes redirectAttributes) {
+                             RedirectAttributes redirectAttributes) throws IOException {
 
         if(bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("feedbackAddBindingModel", feedbackAddBindingModel);

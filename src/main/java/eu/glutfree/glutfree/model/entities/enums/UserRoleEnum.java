@@ -1,6 +1,6 @@
 package eu.glutfree.glutfree.model.entities.enums;
 
-public enum UserRole {
+public enum UserRoleEnum {
   ADMIN,
   USER;
 }

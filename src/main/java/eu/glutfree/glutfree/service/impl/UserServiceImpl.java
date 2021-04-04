@@ -2,9 +2,8 @@ package eu.glutfree.glutfree.service.impl;
 
 import eu.glutfree.glutfree.model.entities.UserEntity;
 import eu.glutfree.glutfree.model.entities.UserRoleEntity;
-import eu.glutfree.glutfree.model.entities.enums.UserRole;
+import eu.glutfree.glutfree.model.entities.enums.UserRoleEnum;
 import eu.glutfree.glutfree.model.service.UserRegistrationServiceModel;
-import eu.glutfree.glutfree.model.service.UserUpdateServiceModel;
 import eu.glutfree.glutfree.repository.UserRepository;
 import eu.glutfree.glutfree.repository.UserRoleRepository;
 import eu.glutfree.glutfree.service.UserService;
@@ -16,6 +15,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -44,8 +45,8 @@ public class UserServiceImpl implements UserService {
 
         if (userRepository.count() == 0) {
 
-            UserRoleEntity adminRole = new UserRoleEntity().setRole(UserRole.ADMIN);
-            UserRoleEntity userRole = new UserRoleEntity().setRole(UserRole.USER);
+            UserRoleEntity adminRole = new UserRoleEntity().setRole(UserRoleEnum.ADMIN);
+            UserRoleEntity userRole = new UserRoleEntity().setRole(UserRoleEnum.USER);
 
             userRoleRepository.saveAll(List.of(adminRole, userRole));
 
@@ -64,7 +65,7 @@ public class UserServiceImpl implements UserService {
         newUser.setPassword(passwordEncoder.encode(serviceModel.getPassword()));
 
         UserRoleEntity userRole = userRoleRepository.
-                findByRole(UserRole.USER).orElseThrow(
+                findByRole(UserRoleEnum.USER).orElseThrow(
                 () -> new IllegalStateException("USER role not found. Please seed the roles."));
 
         newUser.addRole(userRole);
@@ -100,7 +101,6 @@ public class UserServiceImpl implements UserService {
         currentUser.setRegion(userRegistrationServiceModel.getRegion());
         currentUser.setFirstName(userRegistrationServiceModel.getFirstName());
         currentUser.setSecondName(userRegistrationServiceModel.getSecondName());
-
         userRepository.saveAndFlush(currentUser);
 
     }
@@ -121,4 +121,61 @@ public class UserServiceImpl implements UserService {
 
 
     }
+
+
+    @Override
+    public List<String> findAllUserNames() {
+        return userRepository.findAllUserNames();
+    }
+
+
+    @Override
+    public void changeRole(String username, String role) {
+        boolean hasRole = false;
+        UserEntity userEntity = userRepository.findByUsername(username).orElse(null);
+        List<UserRoleEntity> userRolls = userEntity.getRoles();
+        UserRoleEntity userRoleEntity = this.userRoleRepository.findByRole(UserRoleEnum.valueOf(role)).orElse(null);
+        for (UserRoleEntity userRoll : userRolls) {
+            if (userRoll.getRole().equals(UserRoleEnum.valueOf(role))) {
+                hasRole = true;
+            }
+        }
+        if (!hasRole) {
+            userEntity.getRoles().add(userRoleEntity);
+            userRepository.save(userEntity);
+        }
+
+    }
+
+    @Override
+    public void deleteRole(String username, String role) {
+        boolean hasRole = false;
+        UserEntity userEntity = userRepository.findByUsername(username).orElse(null);
+        List<UserRoleEntity> userRolls = userEntity.getRoles();
+        List<UserRoleEntity> newUserRolls = new ArrayList<>();
+        UserRoleEntity userRoleEntity = this.userRoleRepository.findByRole(UserRoleEnum.valueOf(role)).orElse(null);
+        for (UserRoleEntity userRoll : userRolls) {
+            if (userRoll.getRole().equals(UserRoleEnum.valueOf(role))) {
+                hasRole = true;
+            }
+        }
+        if (hasRole) {
+            for (UserRoleEntity userRoll : userRolls) {
+                if (!userRoll.getRole().equals(UserRoleEnum.valueOf(role))) {
+                    newUserRolls.add(userRoll);
+
+                }
+
+            }
+
+        }
+        userEntity.setRoles(newUserRolls);
+        userRepository.save(userEntity);
+    }
+
+
+
+
+
+
 }

@@ -2,6 +2,8 @@ package eu.glutfree.glutfree.service.impl;
 
 import eu.glutfree.glutfree.model.entities.ReceiptEntity;
 import eu.glutfree.glutfree.model.service.ReceiptAddServiceModel;
+import eu.glutfree.glutfree.model.view.FeedbackViewModel;
+import eu.glutfree.glutfree.model.view.ReceiptViewModel;
 import eu.glutfree.glutfree.repository.ReceiptRepository;
 import eu.glutfree.glutfree.service.CloudinaryService;
 import eu.glutfree.glutfree.service.ReceiptService;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -39,28 +42,31 @@ public class ReceiptServiceImpl implements ReceiptService {
         MultipartFile img = receiptAddServiceModel.getImage();
         String imageUrl = cloudinaryService.uploadImage(img);
 
-
         ReceiptEntity receipt = modelMapper.map(receiptAddServiceModel, ReceiptEntity.class);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         receipt.setUser(userService.findUserByUsername(authentication.getName()));
         receipt.setUrlToPic(imageUrl);
         receiptRepository.save(receipt);
 
+    }
+
+    @Override
+    public List<ReceiptViewModel> findAllReceipts() {
+
+        return this.receiptRepository.findAll().stream().map(recepitEntity -> {
+            ReceiptViewModel receiptViewModel = this.modelMapper.map(recepitEntity, ReceiptViewModel.class);
+            return receiptViewModel;
+        }).collect(Collectors.toList());
+    }
 
 
-
+    @Override
+    public void delete(Long id) {
+        receiptRepository.deleteById(id);
 
     }
 
 
-//    @Override
-//    public List<RecepitViewModel> findAll() {
-//        return receiptRepository.
-//                findAll().
-//                stream().
-//                map(se -> modelMapper.map(se, ReceiptViewModel.class)).
-//                collect(Collectors.toList());
-//    }
 
 
 

@@ -2,7 +2,7 @@ package eu.glutfree.glutfree.model.entities;
 
 
 
-import eu.glutfree.glutfree.model.entities.enums.UserRole;
+import eu.glutfree.glutfree.model.entities.enums.UserRoleEnum;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -14,14 +14,14 @@ import javax.persistence.Table;
 public class UserRoleEntity extends BaseEntity {
 
 
-  private UserRole role;
+  private UserRoleEnum role;
 
   @Enumerated(EnumType.STRING)
-  public UserRole getRole() {
+  public UserRoleEnum getRole() {
     return role;
   }
 
-  public UserRoleEntity setRole(UserRole role) {
+  public UserRoleEntity setRole(UserRoleEnum role) {
     this.role = role;
     return this;
   }

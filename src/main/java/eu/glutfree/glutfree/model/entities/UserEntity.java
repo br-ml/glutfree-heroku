@@ -18,6 +18,8 @@ public class UserEntity extends BaseEntity {
   private String firstName;
   private String secondName;
   private RegionEnums region;
+//  private Boolean isProfileUpdated;
+
 
 
 
@@ -39,19 +41,18 @@ public class UserEntity extends BaseEntity {
     this.password = password;
     return this;
   }
+
   @ManyToMany(fetch = FetchType.EAGER)
   public List<UserRoleEntity> getRoles() {
     return roles;
   }
 
-  public UserEntity setRoles(List<UserRoleEntity> roles) {
+  public void setRoles(List<UserRoleEntity> roles) {
     this.roles = roles;
-    return this;
   }
 
-
-  public UserEntity addRole(UserRoleEntity roleEntity) {
-    this.roles.add(roleEntity);
+  public UserEntity addRole(UserRoleEntity userRoleEntity) {
+    this.roles.add(userRoleEntity);
     return this;
   }
 
@@ -87,4 +88,12 @@ public class UserEntity extends BaseEntity {
   public void setRegion(RegionEnums region) {
     this.region = region;
   }
+
+//  public Boolean getProfileUpdated() {
+//    return isProfileUpdated;
+//  }
+//
+//  public void setProfileUpdated(Boolean profileUpdated) {
+//    isProfileUpdated = profileUpdated;
+//  }
 }

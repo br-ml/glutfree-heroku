@@ -15,7 +15,8 @@
         </button>
         <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
             <a class="dropdown-item text-darkgreen" href="/store/add">Add Store</a>
-            <a class="dropdown-item text-darkgreen" href="#">Something else here</a>
+            <a class="dropdown-item text-darkgreen" href="/roles/add">Add Role to User</a>
+            <a class="dropdown-item text-darkgreen" href="/roles/delete">Delete User Role</a>
         </div>
     </div>
 
@@ -23,6 +24,8 @@
 
 
     <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
+
+
         <ul class="navbar-nav row">
 
             <li class="nav-item col-md-4" sec:authorize="!isAuthenticated()">
@@ -66,27 +69,42 @@
                 </form>
             </li>
 
-            <li class="nav-item offset-sm-12" sec:authorize="isAuthenticated()">
+<!--            <li class="nav-item offset-sm-12" sec:authorize="isAuthenticated()">-->
+<!--                <form th:action="@{/users/update}" method="GET">-->
+<!--                    <button type="submit" class="btn btn-outline-success nav-link text-darkgreen border-1 border-darkgreen bg-white text-center active h5">-->
+<!--                        Допълни профила-->
+<!--                    </button>-->
+<!--                </form>-->
+<!--            </li>-->
+
+
+
+<!--            <li sec:authorize="isAuthenticated()" class="nav-item offset-sm-12">-->
+<!--                <form th:action="@{/logout}" method="POST">-->
+<!--                    <button type="submit" class="btn btn-outline-success nav-link text-darkgreen border-1 border-darkgreen bg-white text-center active h5">-->
+<!--                        Изход-->
+<!--                    </button>-->
+<!--                </form>-->
+<!--            </li>-->
+        </ul>
+
+
+        <div  sec:authorize="isAuthenticated()" class="dropdown">
+            <button class="btn btn-secondary text-darkgreen border-1 bg-white dropdown-toggle" type="button" id="dropdownMenuButtonProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Профил
+            </button>
+            <div class="dropdown-menu " aria-labelledby="dropdownMenuButtonProfile">
                 <form th:action="@{/users/update}" method="GET">
-                    <button type="submit" class="btn btn-outline-success nav-link text-darkgreen border-1 border-darkgreen bg-white text-center active h5">
+                    <button type="submit" class="btn btn-outline-success nav-link text-darkgreen border-0 bg-white text-center active h5">
                         Допълни профила
                     </button>
                 </form>
-            </li>
-
-
-            <!--            <li class="nav-item " sec:authorize="isAuthenticated()">-->
-<!--                <form th:action="@{/logout}" method="POST">-->
-<!--                <a class="nav-link text-darkgreen text-center active border border-darkgreen h6"  type="submit">Изход</a>-->
-<!--                </form>-->
-<!--            </li>-->
-            <li sec:authorize="isAuthenticated()" class="nav-item offset-sm-12">
                 <form th:action="@{/logout}" method="POST">
-                    <button type="submit" class="btn btn-outline-success nav-link text-darkgreen border-1 border-darkgreen bg-white text-center active h5">
+                    <button type="submit" class="btn btn-outline-success nav-link text-darkgreen border-0 bg-white text-center active h5">
                         Изход
                     </button>
                 </form>
-            </li>
-        </ul>
+            </div>
+        </div>
     </div>
 </nav>

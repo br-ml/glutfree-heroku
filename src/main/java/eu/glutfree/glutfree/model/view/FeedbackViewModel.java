@@ -1,6 +1,7 @@
 package eu.glutfree.glutfree.model.view;
 
 import eu.glutfree.glutfree.model.entities.enums.TypeOfPlaceEnums;
+import org.springframework.web.multipart.MultipartFile;
 
 public class FeedbackViewModel {
 
@@ -9,7 +10,8 @@ public class FeedbackViewModel {
     private int score;
     private String feedbackText;
     private String webSiteUrl;
-    private String logoPicture;
+    private String urlToPic;
+    private MultipartFile image;
     private TypeOfPlaceEnums typeOfPlace;
 
     public FeedbackViewModel() {
@@ -55,12 +57,20 @@ public class FeedbackViewModel {
         this.webSiteUrl = webSiteUrl;
     }
 
-    public String getLogoPicture() {
-        return logoPicture;
+    public String getUrlToPic() {
+        return urlToPic;
     }
 
-    public void setLogoPicture(String logoPicture) {
-        this.logoPicture = logoPicture;
+    public void setUrlToPic(String urlToPic) {
+        this.urlToPic = urlToPic;
+    }
+
+    public MultipartFile getImage() {
+        return image;
+    }
+
+    public void setImage(MultipartFile image) {
+        this.image = image;
     }
 
     public TypeOfPlaceEnums getTypeOfPlace() {

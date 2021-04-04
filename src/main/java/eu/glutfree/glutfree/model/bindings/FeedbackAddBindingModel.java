@@ -2,6 +2,7 @@ package eu.glutfree.glutfree.model.bindings;
 
 import eu.glutfree.glutfree.model.entities.UserEntity;
 import eu.glutfree.glutfree.model.entities.enums.TypeOfPlaceEnums;
+import org.springframework.web.multipart.MultipartFile;
 
 public class FeedbackAddBindingModel {
 
@@ -9,7 +10,7 @@ public class FeedbackAddBindingModel {
     private int score;
     private String feedbackText;
     private String webSiteUrl;
-    private String logoPicture;
+    private MultipartFile image;
     private TypeOfPlaceEnums typeOfPlace;
 
     public FeedbackAddBindingModel() {
@@ -47,12 +48,12 @@ public class FeedbackAddBindingModel {
         this.webSiteUrl = webSiteUrl;
     }
 
-    public String getLogoPicture() {
-        return logoPicture;
+    public MultipartFile getImage() {
+        return image;
     }
 
-    public void setLogoPicture(String logoPicture) {
-        this.logoPicture = logoPicture;
+    public void setImage(MultipartFile image) {
+        this.image = image;
     }
 
     public TypeOfPlaceEnums getTypeOfPlace() {

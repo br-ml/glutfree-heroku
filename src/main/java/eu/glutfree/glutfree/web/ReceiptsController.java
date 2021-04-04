@@ -9,10 +9,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -58,6 +56,24 @@ public class ReceiptsController {
 
     return "redirect:/";
 
+  }
+
+  @GetMapping("/")
+  public ModelAndView index(ModelAndView modelAndView) {
+
+    modelAndView.addObject("receipts", this.receiptService.findAllReceipts());
+    modelAndView.setViewName("view-receipts");
+
+    return modelAndView;
+  }
+
+  @GetMapping("/delete/{id}")
+  public String delete(@PathVariable Long id,
+                       Model model) {
+
+    receiptService.delete(id);
+
+    return "redirect:/receipt/";
   }
 
 
