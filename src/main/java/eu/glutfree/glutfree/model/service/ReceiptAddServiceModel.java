@@ -1,11 +1,8 @@
 package eu.glutfree.glutfree.model.service;
 
-import eu.glutfree.glutfree.model.entities.BaseEntity;
 import eu.glutfree.glutfree.model.entities.enums.TypeOfMealsEnums;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
 
 
 public class ReceiptAddServiceModel {

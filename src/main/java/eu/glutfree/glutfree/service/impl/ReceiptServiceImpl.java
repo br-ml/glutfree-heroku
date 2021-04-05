@@ -5,6 +5,7 @@ import eu.glutfree.glutfree.exceptions.UserNotFoundException;
 import eu.glutfree.glutfree.model.entities.ReceiptEntity;
 import eu.glutfree.glutfree.model.service.ReceiptAddServiceModel;
 import eu.glutfree.glutfree.model.view.FeedbackViewModel;
+import eu.glutfree.glutfree.model.view.FoodViewModel;
 import eu.glutfree.glutfree.model.view.ReceiptViewModel;
 import eu.glutfree.glutfree.repository.ReceiptRepository;
 import eu.glutfree.glutfree.service.CloudinaryService;
@@ -76,9 +77,13 @@ public class ReceiptServiceImpl implements ReceiptService {
 
     }
 
+    @Override
+    public ReceiptViewModel findById(Long id) {
+        return receiptRepository.findById(id).map(receiptEntity -> {
+            ReceiptViewModel receiptViewModel = modelMapper.map(receiptEntity,ReceiptViewModel.class);
 
-
-
-
+            return receiptViewModel;
+        }).orElseThrow(IllegalArgumentException::new);
+    }
 
 }

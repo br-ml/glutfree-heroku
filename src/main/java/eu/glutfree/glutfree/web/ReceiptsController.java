@@ -3,6 +3,8 @@ package eu.glutfree.glutfree.web;
 import eu.glutfree.glutfree.model.bindings.ReceiptAddBindingModel;
 import eu.glutfree.glutfree.model.bindings.UserRegistrationBindingModel;
 import eu.glutfree.glutfree.model.service.ReceiptAddServiceModel;
+import eu.glutfree.glutfree.model.view.FoodViewModel;
+import eu.glutfree.glutfree.model.view.ReceiptViewModel;
 import eu.glutfree.glutfree.service.ReceiptService;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -74,6 +76,17 @@ public class ReceiptsController {
     receiptService.deleteReceipt(id);
 
     return "redirect:/receipt/";
+  }
+
+
+  @GetMapping("/details/{id}")
+  public String details(@PathVariable Long id, Model model){
+
+    ReceiptViewModel receiptViewModel = receiptService.findById(id);
+
+    model.addAttribute("receipt", receiptViewModel);
+
+    return "details-receipt";
   }
 
 
