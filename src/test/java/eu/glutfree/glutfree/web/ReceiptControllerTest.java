@@ -67,8 +67,8 @@ public class ReceiptControllerTest {
         receiptRepository.deleteAll();
 
         UserEntity userPesho = new UserEntity();
-        userPesho.setUsername("admin");
-        userPesho.setPassword("admin");
+        userPesho.setUsername("pesho");
+        userPesho.setPassword("pesho1");
         UserEntity theUser = userRepository.save(userPesho);
 
 
@@ -89,7 +89,7 @@ public class ReceiptControllerTest {
     }
 
     @Test
-    @WithMockUser(value = "admin", roles = {"USER", "ADMIN"}) // autheticateUser
+    @WithMockUser(value = "pesho", roles = {"USER", "ADMIN"}) // autheticateUser
     void testShouldReturnViewStatusAndModel() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get(
                 RECEIPT_CONTROLLER_PREFIX + "/details/{id}",   testReceiptId
