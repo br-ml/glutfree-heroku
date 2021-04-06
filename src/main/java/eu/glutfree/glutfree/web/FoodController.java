@@ -118,7 +118,7 @@ public class FoodController {
 
         model.addAttribute("food", foodViewModel);
 
-        return "details";
+        return "details-food";
     }
 
 

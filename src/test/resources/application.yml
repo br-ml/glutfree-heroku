@@ -21,3 +21,8 @@ spring:
     hiddenmethod:
       filter:
         enabled: true
+
+cloudinary:
+          cloud-name: test
+          api-key: test
+          api-secret: test

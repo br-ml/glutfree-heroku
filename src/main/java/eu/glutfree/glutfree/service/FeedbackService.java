@@ -15,4 +15,6 @@ public interface FeedbackService {
 
     void delete(Long id);
 
+    FeedbackViewModel findById(Long id);
+
 }

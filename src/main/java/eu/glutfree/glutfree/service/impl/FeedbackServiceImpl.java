@@ -4,6 +4,7 @@ import eu.glutfree.glutfree.model.entities.FeedbackEntity;
 import eu.glutfree.glutfree.model.entities.ReceiptEntity;
 import eu.glutfree.glutfree.model.service.FeedbackAddServiceModel;
 import eu.glutfree.glutfree.model.view.FeedbackViewModel;
+import eu.glutfree.glutfree.model.view.FoodViewModel;
 import eu.glutfree.glutfree.repository.FeedbackRepository;
 import eu.glutfree.glutfree.service.CloudinaryService;
 import eu.glutfree.glutfree.service.FeedbackService;
@@ -64,4 +65,19 @@ public class FeedbackServiceImpl implements FeedbackService {
         feedbackRepository.deleteById(id);
 
     }
+
+
+
+    @Override
+    public FeedbackViewModel findById(Long id) {
+        return feedbackRepository
+                .findById(id)
+                .map(feedbackEntity -> {
+                    FeedbackViewModel feedbackViewModel = modelMapper
+                            .map(feedbackEntity, FeedbackViewModel.class);
+                    return feedbackViewModel;
+                })
+                .orElseThrow(IllegalArgumentException::new);
+    }
+
 }

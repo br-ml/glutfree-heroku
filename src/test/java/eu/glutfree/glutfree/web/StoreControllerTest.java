@@ -1,12 +1,8 @@
 package eu.glutfree.glutfree.web;
 
-import eu.glutfree.glutfree.model.entities.ReceiptEntity;
 import eu.glutfree.glutfree.model.entities.StoreEntity;
-import eu.glutfree.glutfree.model.entities.UserEntity;
-import eu.glutfree.glutfree.model.entities.enums.TypeOfMealsEnums;
-import eu.glutfree.glutfree.repository.ReceiptRepository;
 import eu.glutfree.glutfree.repository.StoreRepository;
-import eu.glutfree.glutfree.repository.UserRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +13,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
@@ -24,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureTestDatabase
 public class StoreControllerTest {
 
-    private static final String RECEIPT_CONTROLLER_PREFIX = "/store";
+    private static final String STORE_CONTROLLER_PREFIX = "/store";
 
 
     private long testStoreId;
@@ -56,13 +53,32 @@ public class StoreControllerTest {
 
     }
 
-//    @Test
-//    void testShouldReturnViewStatusAndModel() throws Exception {
-//        mockMvc.perform(MockMvcRequestBuilders.get(
-//                RECEIPT_CONTROLLER_PREFIX,   testStoreId
-//        )).andExpect(status().isOk()).andExpect(view().name("details")).
-//                andExpect(model().attributeExists("receipt"));
-//    }
+
+
+    @Test
+    @WithMockUser(value = "pesho", roles = {"USER", "ADMIN"})
+    void testShouldReturnViewStatusAndModel_of_store_add() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get(
+                STORE_CONTROLLER_PREFIX + "/add"
+        )).andExpect(status().isOk()).andExpect(view().name("add-store"));
+    }
+
+
+    @Test
+    @WithMockUser(value = "pesho", roles = {"USER", "ADMIN"})
+    void addStore_post_success() throws Exception {
+
+        mockMvc.perform(MockMvcRequestBuilders.post(STORE_CONTROLLER_PREFIX + "/add")
+                .param("name", "banitca").
+                        param("storeWebSiteUrl", "_fKAsvJrFes").
+                        param("logoUrl", "UTRest").
+                        with(csrf())).
+                andExpect(status().is3xxRedirection());
+
+        Assertions.assertEquals(3, storeRepository.count());
+    }
+
+
 
 
 

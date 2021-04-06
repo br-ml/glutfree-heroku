@@ -2,6 +2,8 @@ package eu.glutfree.glutfree.web;
 
 import eu.glutfree.glutfree.model.bindings.FeedbackAddBindingModel;
 import eu.glutfree.glutfree.model.service.FeedbackAddServiceModel;
+import eu.glutfree.glutfree.model.view.FeedbackViewModel;
+import eu.glutfree.glutfree.model.view.ReceiptViewModel;
 import eu.glutfree.glutfree.service.FeedbackService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
@@ -76,6 +78,16 @@ public class FeedbackController {
         feedbackService.delete(id);
 
         return "redirect:/feedback/";
+    }
+
+    @GetMapping("/details/{id}")
+    public String details(@PathVariable Long id, Model model){
+
+        FeedbackViewModel feedbackViewModel = feedbackService.findById(id);
+
+        model.addAttribute("feedback", feedbackViewModel);
+
+        return "details-feedback";
     }
 
 
