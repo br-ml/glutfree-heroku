@@ -19,7 +19,7 @@ searchBar.addEventListener('keyup', (e) => {
     let filteredFoods = allFoods.filter(food => {
         return food.name.toLowerCase().includes(searchingCharacters)
             || food.brand.toLowerCase().includes(searchingCharacters)
-            || food.store.name.toLowerCase().includes(searchingCharacters);
+            || food.store.toLowerCase().includes(searchingCharacters);
     });
     console.log(filteredFoods);
     displayFoods(filteredFoods);
@@ -39,7 +39,7 @@ const displayFoods = (foods) => {
                     <div class="text-center">
                         <p class="card-text border-bottom ">Име: ${a.name}</p>
                         <p class="card-text border-bottom ">Марка: ${a.brand}</p>
-                        <p class="card-text border-bottom ">Магазин: ${a.store.name}</p>
+                        <p class="card-text border-bottom ">Магазин: ${a.store}</p>
                           <p class="card-text border-bottom ">
                           
                   ${a.nimaTested ?  '<img  src="../img/nima-logo.png" alt="pic" style="height: 50px; width: 50px;">' : ''}

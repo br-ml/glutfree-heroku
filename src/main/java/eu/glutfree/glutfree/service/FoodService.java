@@ -23,6 +23,8 @@ public interface FoodService {
 
     FoodEntity findEntityById(Long foodId);
 
+
+
 //    List<FoodViewModel> findTopThreeViewedFoods();
 
 }

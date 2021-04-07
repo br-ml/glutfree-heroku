@@ -11,6 +11,7 @@ import eu.glutfree.glutfree.repository.UserRepository;
 import eu.glutfree.glutfree.repository.UserRoleRepository;
 import eu.glutfree.glutfree.service.UserService;
 import org.modelmapper.ModelMapper;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -43,7 +44,7 @@ public class UserServiceImpl implements UserService {
         this.glutfreeDBUserService = glutfreeDBUserService;
     }
 
-
+    @Async
     @Override
     public void seedUsers() {
 
@@ -100,7 +101,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateUser(UserRegistrationServiceModel userRegistrationServiceModel) {
         UserEntity currentUser = userRepository.findById(userRegistrationServiceModel.getId()).orElseThrow(
-                () -> new IllegalStateException("USER  not found."));
+                () -> new UserNotFoundException("USER  not found."));
 
         currentUser.setRegion(userRegistrationServiceModel.getRegion());
         currentUser.setFirstName(userRegistrationServiceModel.getFirstName());
