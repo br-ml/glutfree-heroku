@@ -9,6 +9,9 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 
 
 public class ReceiptAddBindingModel {
@@ -24,7 +27,8 @@ public class ReceiptAddBindingModel {
 
     public ReceiptAddBindingModel() {
     }
-    @Length(min =2 , message = "Username length must be min two chars")
+    @NotBlank(message = "The name cannot be empty!")
+    @Length(min = 2, max = 50, message = "The name must contains between 2 and 50 characters.")
     public String getName() {
         return name;
     }
@@ -32,7 +36,9 @@ public class ReceiptAddBindingModel {
     public void setName(String name) {
         this.name = name;
     }
-    @Length(min =2 , message = "Username length must be min асасасас chars")
+
+    @NotBlank(message = "The name cannot be empty!")
+    @Length(min = 2, max = 50, message = "The product list must contains between 2 and 50 characters.")
     public String getProductsList() {
         return productsList;
     }
@@ -41,6 +47,7 @@ public class ReceiptAddBindingModel {
         this.productsList = productsList;
     }
 
+    @NotBlank(message = "You must select a category!")
     public TypeOfMealsEnums getTypeOfMeal() {
         return typeOfMeal;
     }
@@ -57,7 +64,8 @@ public class ReceiptAddBindingModel {
         this.image = image;
     }
 
-    @Length(min =2 , message = "Username length must be miдсфсдфn two chars")
+    @Length(min = 5, max = 1000, message = "The product description must be at least 5 characters and max 1000.")
+    @NotBlank(message = "The description cannot be empty!")
     public String getDescription() {
         return description;
     }
@@ -65,7 +73,8 @@ public class ReceiptAddBindingModel {
     public void setDescription(String description) {
         this.description = description;
     }
-
+    @Min(value = 0, message = "Must be a more than 0")
+    @Max(value = 500, message = "Must be a less than 500")
     public int getDuration() {
         return duration;
     }

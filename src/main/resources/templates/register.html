@@ -27,6 +27,7 @@
                                th:value="*{username}"
                                th:errorclass="is-invalid"
                                type="text"
+                               required minlength="3" maxlength="50"
                                id="inputUsername"
                                class="form-control"
                                aria-describedby="usernameHelpInline">
@@ -65,12 +66,13 @@
                         <input name="password"
                                th:errorclass="is-invalid"
                                type="password"
+                               required minlength="5" maxlength="50"
                                id="inputPassword"
                                class="form-control"
                                aria-describedby="passwordHelpInline">
                         <small id="passwordError"
                                class="invalid-feedback text-light form-text bg-danger rounded">
-                            Password length must be between 5 and 20 characters and passwords should match.
+                            Password length must be between 5 and 50 characters and passwords should match.
                         </small>
                     </div>
                 </div>
@@ -86,11 +88,12 @@
                                th:errorclass="is-invalid"
                                type="password"
                                id="inputConfirmPassword"
+                               required minlength="5" maxlength="50"
                                class="form-control"
                                aria-describedby="confirmPasswordHelpInline">
                         <small id="confirmPasswordError"
                                class="invalid-feedback text-light form-text bg-danger rounded">
-                            Password length must be between 5 and 20 characters and passwords should match.
+                            Password length must be between 5 and 50 characters and passwords should match.
                         </small>
                     </div>
                 </div>

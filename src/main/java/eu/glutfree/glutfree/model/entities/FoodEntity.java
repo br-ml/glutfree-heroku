@@ -1,6 +1,7 @@
 package eu.glutfree.glutfree.model.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
@@ -19,7 +20,8 @@ public class FoodEntity extends BaseEntity{
 
     public FoodEntity() {
     }
-
+    @Column(nullable = false)
+    @Size(min = 2, max = 50)
     public String getName() {
         return name;
     }
@@ -47,7 +49,7 @@ public class FoodEntity extends BaseEntity{
 //        this.storeEntities = storeEntities;
 //    }
 
-
+    @Column(name = "url_top_pic")
     public String getUrlToPic() {
         return urlToPic;
     }
@@ -55,7 +57,8 @@ public class FoodEntity extends BaseEntity{
     public void setUrlToPic(String urlToPic) {
         this.urlToPic = urlToPic;
     }
-
+    @Column(nullable = false)
+    @Size(min = 2, max = 50)
     public String getBrand() {
         return brand;
     }

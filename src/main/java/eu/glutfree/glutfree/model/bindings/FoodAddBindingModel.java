@@ -1,8 +1,11 @@
 package eu.glutfree.glutfree.model.bindings;
 
 import eu.glutfree.glutfree.model.entities.StoreEntity;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 public class FoodAddBindingModel {
@@ -17,7 +20,8 @@ public class FoodAddBindingModel {
 
     public FoodAddBindingModel() {
     }
-
+    @NotBlank(message = "The name cannot be empty!")
+    @Length(min = 2, max = 50, message = "The name must contains between 2 and 50 characters.")
     public String getName() {
         return name;
     }
@@ -26,6 +30,8 @@ public class FoodAddBindingModel {
         this.name = name;
     }
 
+    @NotBlank(message = "The brand cannot be empty!")
+    @Length(min = 2, max = 50, message = "The brand name must contains between 2 and 50 characters.")
     public String getBrand() {
         return brand;
     }
@@ -84,7 +90,7 @@ public class FoodAddBindingModel {
     public void setWithoutLactose(boolean withoutLactose) {
         this.withoutLactose = withoutLactose;
     }
-
+    @NotBlank(message = "The Store cannot be empty!")
     public String getStore() {
         return store;
     }

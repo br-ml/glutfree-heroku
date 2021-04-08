@@ -4,6 +4,9 @@ import eu.glutfree.glutfree.model.entities.enums.TypeOfMealsEnums;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="receipts")
@@ -23,6 +26,7 @@ public class ReceiptEntity extends BaseEntity{
 
 
     @Column(nullable = false)
+    @Size(min = 2, max = 50)
     public String getName() {
         return name;
     }
@@ -31,7 +35,8 @@ public class ReceiptEntity extends BaseEntity{
         this.name = name;
     }
 
-    @Column(nullable = false)
+    @Column(name = "products_list", nullable = false)
+    @Size(min = 2, max = 50)
     public String getProductsList() {
         return productsList;
     }
@@ -40,6 +45,7 @@ public class ReceiptEntity extends BaseEntity{
         this.productsList = productsList;
     }
     @Enumerated
+    @Column(name = "type_of_meal", nullable = false)
     public TypeOfMealsEnums getTypeOfMeal() {
         return typeOfMeal;
     }
@@ -47,7 +53,7 @@ public class ReceiptEntity extends BaseEntity{
     public void setTypeOfMeal(TypeOfMealsEnums typeOfMeal) {
         this.typeOfMeal = typeOfMeal;
     }
-
+    @Column(name = "url_to_pic")
     public String getUrlToPic() {
         return urlToPic;
     }
@@ -72,7 +78,9 @@ public class ReceiptEntity extends BaseEntity{
     public void setDescription(String description) {
         this.description = description;
     }
-
+    @Min(value = 1)
+    @Max(value = 500)
+    @Column(nullable = false)
     public int getDuration() {
         return duration;
     }

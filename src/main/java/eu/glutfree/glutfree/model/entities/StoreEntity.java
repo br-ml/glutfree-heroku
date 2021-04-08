@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
@@ -18,7 +19,8 @@ public class StoreEntity extends BaseEntity{
 
     public StoreEntity() {
     }
-
+    @Column(name = "name", nullable = false, unique = true)
+    @Size(min = 1, max = 20)
     public String getName() {
         return name;
     }
@@ -35,7 +37,7 @@ public class StoreEntity extends BaseEntity{
 //    public void setFoods(Set<FoodEntity> foodEntities) {
 //        this.foodEntities = foodEntities;
 //    }
-    @Column(length = 512)
+    @Column(name = "web_site_url" ,length = 512)
     public String getStoreWebSiteUrl() {
         return storeWebSiteUrl;
     }
@@ -43,7 +45,7 @@ public class StoreEntity extends BaseEntity{
     public void setStoreWebSiteUrl(String storeWebSiteUrl) {
         this.storeWebSiteUrl = storeWebSiteUrl;
     }
-
+    @Column(name = "logo_url", length = 512)
     public String getLogoUrl() {
         return logoUrl;
     }

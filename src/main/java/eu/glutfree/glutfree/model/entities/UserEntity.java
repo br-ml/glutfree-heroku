@@ -1,8 +1,11 @@
 package eu.glutfree.glutfree.model.entities;
 
 import eu.glutfree.glutfree.model.entities.enums.RegionEnums;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +26,8 @@ public class UserEntity extends BaseEntity {
 
 
 
-  @Column(nullable = false)
+  @Column(name = "username", nullable = false, unique = true)
+  @Length(min = 3, max = 20)
   public String getUsername() {
     return username;
   }
@@ -32,7 +36,8 @@ public class UserEntity extends BaseEntity {
     this.username = name;
     return this;
   }
-  @Column(nullable = false)
+  @Column(name = "password", nullable = false)
+  @Length(min = 5, max = 60)
   public String getPassword() {
     return password;
   }
@@ -55,16 +60,17 @@ public class UserEntity extends BaseEntity {
     this.roles.add(userRoleEntity);
     return this;
   }
-
+  @Email
   public String getEmail() {
     return email;
   }
 
-  public void setEmail(String email) {
+  public UserEntity setEmail(String email) {
     this.email = email;
+    return this;
   }
 
-
+  @Column(name = "first_name")
   public String getFirstName() {
     return firstName;
   }
@@ -72,7 +78,7 @@ public class UserEntity extends BaseEntity {
   public void setFirstName(String firstName) {
     this.firstName = firstName;
   }
-
+  @Column(name = "second_name")
   public String getSecondName() {
     return secondName;
   }

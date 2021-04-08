@@ -2,6 +2,8 @@ package eu.glutfree.glutfree.model.bindings;
 
 import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.NotBlank;
+
 public class UserLoginBindingModel {
 
     private String username;
@@ -10,7 +12,8 @@ public class UserLoginBindingModel {
     public UserLoginBindingModel() {
     }
 
-    @Length(min =2 , message = "Username length must be min two chars")
+    @NotBlank(message = "The username cannot be empty!")
+    @Length(min = 3, max = 50, message = "The username must contains between 3 and 50 characters.")
     public String getUsername() {
         return username;
     }
@@ -18,7 +21,8 @@ public class UserLoginBindingModel {
     public void setUsername(String username) {
         this.username = username;
     }
-    @Length(min = 3 , message = "Password length must be min three chars")
+    @NotBlank(message = "The password cannot be empty!")
+    @Length(min = 5, max = 50, message = "The password must contains between 5 and 50 characters.")
     public String getPassword() {
         return password;
     }
