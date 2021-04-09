@@ -14,6 +14,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Array;
 import java.time.LocalDateTime;
@@ -97,9 +98,15 @@ public class LogServiceImpl implements LogService {
     public List<FoodViewModel> findTopThreeViewedFoods() {
         return this.logRepository.findTopThreefood().stream().map(foodId -> {
             FoodViewModel foodViewModel = foodService.findById(foodId);
+
             return foodViewModel;
         }).collect(Collectors.toList());
 
+    }
+    @Transactional
+    @Override
+    public void deleteAllById(Long id) {
+        logRepository.deleteAllByFoodEntity_Id(id);
     }
 
 }

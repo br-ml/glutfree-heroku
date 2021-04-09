@@ -47,7 +47,7 @@ public class ReceiptAddBindingModel {
         this.productsList = productsList;
     }
 
-    @NotBlank(message = "You must select a category!")
+//    @NotBlank(message = "You must select a category!")
     public TypeOfMealsEnums getTypeOfMeal() {
         return typeOfMeal;
     }

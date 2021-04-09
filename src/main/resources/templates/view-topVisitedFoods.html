@@ -22,7 +22,7 @@
                         <div class="text-center">
                             <p class="card-text border-bottom "th:text="|Име: *{name}|"></p>
                             <p class="card-text border-bottom "th:text="|Марка: *{brand}|" ></p>
-                            <p class="card-text border-bottom "th:text="|Магазин: *{storelogoUrl}|" ></p>
+                            <a th:href= "*{store}">  <p class="card-text border-bottom "th:text="|Магазин: *{store}|" ></p> </a>
 
                                 <img th:if="*{nimaTested}" src="../img/nima-logo.png" alt="pic"
                                      style="height: 50px; width: 50px;">

@@ -24,6 +24,8 @@ public interface LogRepository extends JpaRepository<LogEntity, Long> {
     @Query(nativeQuery = true, value = "Select p.food_entity_id from (SELECT l.food_entity_id, COUNT(l.id) as countlist FROM logs as l GROUP BY l.food_entity_id ORDER BY countlist DESC LIMIT 6) as p")
     List<Long> findTopThreefood();
 
+    void deleteAllByFoodEntity_Id(Long id);
+
 
 //    @Query(nativeQuery = true, value = "SELECT l.food_entity_id.id, COUNT(l.id) as lCount FROM logs l GROUP BY l.food_entity_id.id order by lCount desc LIMIT 3 ")
 //    HashMap<Long, Integer> findTopThreefoods();

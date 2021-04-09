@@ -16,5 +16,7 @@ public interface LogService {
 
     List<FoodViewModel> findTopThreeViewedFoods();
 
+    void deleteAllById(Long id);
+
 //    List<FoodViewModel> convertFromLongToModelTopThreeViewedFoods();
 }

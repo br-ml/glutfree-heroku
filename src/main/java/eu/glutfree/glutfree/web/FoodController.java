@@ -106,7 +106,9 @@ public class FoodController {
     public String delete(@PathVariable Long id,
                          Model model) {
 
+        logService.deleteAllById(id);
         foodService.delete(id);
+
 
         return "redirect:/food/";
     }
@@ -115,9 +117,7 @@ public class FoodController {
     public String details(@PathVariable Long id, Model model){
 
         FoodViewModel foodViewModel = foodService.findById(id);
-
         model.addAttribute("food", foodViewModel);
-
         return "details-food";
     }
 

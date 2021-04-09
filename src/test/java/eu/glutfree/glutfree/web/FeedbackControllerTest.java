@@ -129,6 +129,7 @@ public class FeedbackControllerTest {
                         param("webSiteUrl", "fKAsvJrFes").
                         param("feedbackText", "Description test").
                         param("score", "2").
+                        param("typeOfPlace", String.valueOf(TypeOfPlaceEnums.МАГАЗИН)).
                         with(csrf())).
                 andExpect(status().is3xxRedirection());
 

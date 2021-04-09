@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class FoodServiceImpl implements FoodService {
+public class    FoodServiceImpl implements FoodService {
     private final ModelMapper modelMapper;
     private final FoodRepository foodRepository;
     private final StoreService storeService;

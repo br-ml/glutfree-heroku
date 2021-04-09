@@ -21,18 +21,23 @@
                  data-holder-rendered="true"
                  style="height: 225px; width: 200px;  text-align: center;">
             <dl class="row pt-3">
-                <dt class="col-sm-3">Име :</dt>
-                <dd class="col-sm-9" th:text="|*{name}|">Name</dd>
+                <dt class="col-sm-3 text-lightgreen">Име:</dt>
+                <dd class="col-sm-9 text-lightgreen" th:text="|*{name}|">Име</dd>
 
-                <dt class="col-sm-3">Марка: </dt>
-                <dd class="col-sm-9" th:text="| *{brand}|">Brand
+                <dt class="col-sm-3 text-lightgreen">Марка: </dt>
+                <dd class="col-sm-9 text-lightgreen" th:text="| *{brand}|">Марка
                 </dd>
 
-                <dt class="col-sm-3">Магазин: </dt>
-                <dd class="col-sm-9" th:text="| *{store}|">Artist
-                </dd>
+                <dt class="col-sm-3 text-lightgreen">Магазин: </dt>
+                <a  class="text-lightgreen" th:href= "*{store}">
+                <dd class="col-sm-9 text-lightgreen" th:text="| *{store}|">Магазин
+                </a></dd>
 
-                <dt class="col-sm-3">Тествана : </dt>
+
+<!--                <dd class="col-sm-9" th:text="| *{store}|" th:href= "@{store}">Магазин-->
+<!--                </dd>-->
+
+                <dt class="col-sm-3 text-lightgreen">Тествана : </dt>
                 <img th:if="*{nimaTested}" src="/img/nima-logo.png" alt="pic"
                      style="height: 50px; width: 50px;">
 

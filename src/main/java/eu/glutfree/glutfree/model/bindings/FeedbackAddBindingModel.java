@@ -67,7 +67,7 @@ public class FeedbackAddBindingModel {
         this.image = image;
     }
 
-    @NotBlank(message = "You must select a category!")
+//    @NotBlank(message = "You must select a category!")
     public TypeOfPlaceEnums getTypeOfPlace() {
         return typeOfPlace;
     }
