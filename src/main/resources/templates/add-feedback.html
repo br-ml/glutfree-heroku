@@ -17,7 +17,7 @@
             <div class="form-row m-5 text-lightgreen">
                 <div class="col ">
                     <label for="name" >Име на обекта</label>
-                    <input id="name" th:value="*{name}" th:errorclass="bg-danger" name="name" type="text" class="form-control" placeholder="Име">
+                    <input id="name" th:value="*{name}" th:errorclass="bg-danger" name="name" required minlength="2" maxlength="50" type="text" class="form-control" placeholder="Име">
                     <small th:if="${#fields.hasErrors('name')}" th:errors="*{name}" id="nameError" class="form-text bg-danger rounded">Name must be between 3 and 20
                         characters</small>
                 </div>
@@ -33,7 +33,7 @@
             <div class="form-row m-5 text-lightgreen ">
                 <div class="col">
                     <label for="score">Колко точки даваш</label>
-                    <input id="score" th:value="*{score}" th:errorclass="bg-danger" name="score" type="number" class="form-control" placeholder="точки">
+                    <input id="score" th:value="*{score}" th:errorclass="bg-danger" name="score" required min=1 max=5 type="number" class="form-control" placeholder="точки">
                     <small th:if="${#fields.hasErrors('score')}" th:errors="*{score}" id="scoreError" class="form-text bg-danger rounded">Products List must be less</small>
                 </div>
 
@@ -49,7 +49,7 @@
             <div class="form-row m-5 text-lightgreen ">
             <div class="col">
                 <label for="webSiteUrl">Страница</label>
-                <input id="webSiteUrl" th:value="*{webSiteUrl}" th:errorclass="bg-danger" name="webSiteUrl" type="text" class="form-control" placeholder="Страница">
+                <input id="webSiteUrl" th:value="*{webSiteUrl}" th:errorclass="bg-danger" name="webSiteUrl" required minlength="2" maxlength="50" type="text" class="form-control" placeholder="Страница">
                 <small th:if="${#fields.hasErrors('webSiteUrl')}" th:errors="*{webSiteUrl}" id="webSiteUrlError" class="form-text bg-danger rounded">Image url must be more than 5
                     characters</small>
             </div>
@@ -57,7 +57,7 @@
             <div class="form-row m-5 text-lightgreen">
                 <div class="col">
                     <label for="feedbackText">Обратна връзка</label>
-                    <textarea th:value="*{feedbackText}" th:errorclass="bg-danger" id="feedbackText" name="feedbackText" type="text" class="form-control" placeholder="Обратна връзка" style="height: 126px;" ></textarea>
+                    <textarea th:value="*{feedbackText}" th:errorclass="bg-danger" id="feedbackText" required minlength="5" maxlength="1000" name="feedbackText" type="text" class="form-control" placeholder="Обратна връзка" style="height: 126px;" ></textarea>
                     <small  th:if="${#fields.hasErrors('feedbackText')}" th:errors="*{feedbackText}" id="feedbackTextError" class="form-text bg-danger rounded">Description length must be more than 5 characters</small>
                 </div>
             </div>

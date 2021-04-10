@@ -8,10 +8,10 @@ import eu.glutfree.glutfree.service.UserRollEntityService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserRollEntityServiceImpl implements UserRollEntityService {
+public class UserRoleEntityServiceImpl implements UserRollEntityService {
     private final UserRoleRepository userRoleRepository;
 
-    public UserRollEntityServiceImpl(UserRoleRepository userRoleRepository) {
+    public UserRoleEntityServiceImpl(UserRoleRepository userRoleRepository) {
         this.userRoleRepository = userRoleRepository;
     }
 
