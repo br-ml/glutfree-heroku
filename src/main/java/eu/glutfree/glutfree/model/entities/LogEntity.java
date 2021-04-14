@@ -10,22 +10,22 @@ import java.time.LocalDateTime;
 @Table(name = "logs")
 public class LogEntity extends BaseEntity{
 
-    private UserEntity userEntity;
+//    private UserEntity userEntity;
     private FoodEntity foodEntity;
     private String action;
     private LocalDateTime dateTime;
 
     public LogEntity() {
     }
-    @ManyToOne
-    public UserEntity getUserEntity() {
-        return userEntity;
-    }
-
-    public LogEntity setUserEntity(UserEntity userEntity) {
-        this.userEntity = userEntity;
-        return this;
-    }
+//    @ManyToOne
+//    public UserEntity getUserEntity() {
+//        return userEntity;
+//    }
+//
+//    public LogEntity setUserEntity(UserEntity userEntity) {
+//        this.userEntity = userEntity;
+//        return this;
+//    }
     @ManyToOne
     public FoodEntity getFoodEntity() {
         return foodEntity;

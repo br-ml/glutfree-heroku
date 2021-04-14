@@ -16,4 +16,13 @@ public class HomeController {
         return "index";
     }
 
+    @GetMapping("/blog")
+    public String blog() {
+        return "coming-soon";
+    }
+
+    @GetMapping("/aboutus")
+    public String aboutus() {
+        return "coming-soon";
+    }
 }

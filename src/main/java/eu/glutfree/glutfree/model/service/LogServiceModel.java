@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 public class LogServiceModel {
 
     private Long id;
-    private String user;
+//    private String user;
     private String food;
     private String action;
     private LocalDateTime dateTime;
@@ -13,14 +13,14 @@ public class LogServiceModel {
     public LogServiceModel() {
     }
 
-    public String getUser() {
-        return user;
-    }
-
-    public LogServiceModel setUser(String user) {
-        this.user = user;
-        return this;
-    }
+//    public String getUser() {
+//        return user;
+//    }
+//
+//    public LogServiceModel setUser(String user) {
+//        this.user = user;
+//        return this;
+//    }
 
     public String getFood() {
         return food;

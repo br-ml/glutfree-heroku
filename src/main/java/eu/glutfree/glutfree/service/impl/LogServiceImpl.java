@@ -26,13 +26,13 @@ public class LogServiceImpl implements LogService {
 
     private final LogRepository logRepository;
     private final FoodService foodService;
-    private final UserService userService;
+//    private final UserService userService;
     private final ModelMapper modelMapper;
 
-    public LogServiceImpl(LogRepository logRepository, FoodService foodService, UserService userService, ModelMapper modelMapper) {
+    public LogServiceImpl(LogRepository logRepository, FoodService foodService,  ModelMapper modelMapper) {
         this.logRepository = logRepository;
         this.foodService = foodService;
-        this.userService = userService;
+//        this.userService = userService;
         this.modelMapper = modelMapper;
     }
 
@@ -40,17 +40,17 @@ public class LogServiceImpl implements LogService {
     public void createLog(String action, Long foodId) {
         FoodEntity foodEntity = foodService
                 .findEntityById(foodId);
-
-        Authentication authentication = SecurityContextHolder
-                .getContext()
-                .getAuthentication();
-
-        String username = authentication.getName();
-        UserEntity userEntity = userService.findByName(username);
+//
+//        Authentication authentication = SecurityContextHolder
+//                .getContext()
+//                .getAuthentication();
+//
+//        String username = authentication.getName();
+//        UserEntity userEntity = userService.findByName(username);
 
         LogEntity logEntity = new LogEntity()
                 .setFoodEntity(foodEntity)
-                .setUserEntity(userEntity)
+//                .setUserEntity(userEntity)
                 .setAction(action)
                 .setDateTime(LocalDateTime.now());
 
@@ -67,17 +67,12 @@ public class LogServiceImpl implements LogService {
                     LogServiceModel logServiceModel = modelMapper
                             .map(logEntity, LogServiceModel.class);
                     logServiceModel.setFood(logEntity.getFoodEntity().getName());
-                    logServiceModel.setUser(logEntity.getUserEntity().getUsername());
+//                    logServiceModel.setUser(logEntity.getUserEntity().getUsername());
 
                     return logServiceModel;
                 })
                 .collect(Collectors.toList());
     }
-
-//    @Override
-//    public List<Long> findTopThreeLogs() {
-//        return logRepository.findTopThreefoods();
-//    }
 
 
 

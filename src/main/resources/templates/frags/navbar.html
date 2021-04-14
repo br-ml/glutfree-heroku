@@ -44,7 +44,7 @@
                 </form>
             </li>
 
-            <li class="nav-item offset-sm-12" sec:authorize="isAuthenticated()"  >
+            <li class="nav-item offset-sm-12" sec:authorize="hasRole('ROLE_ADMIN')"  >
 
                 <form th:action="@{/receipt/add}" method="GET">
                     <button type="submit" class="btn btn-outline-success nav-link text-darkgreen border-1 border-darkgreen bg-white text-center active h5">
@@ -53,7 +53,7 @@
                 </form>
 
             </li>
-            <li class="nav-item offset-sm-12" sec:authorize="isAuthenticated()">
+            <li class="nav-item offset-sm-12" sec:authorize="hasRole('ROLE_ADMIN')">
                 <form th:action="@{/feedback/add}" method="GET">
                     <button type="submit" class="btn btn-outline-success nav-link text-darkgreen border-1 border-darkgreen bg-white text-center active h5">
                         Добави feedback
@@ -61,7 +61,7 @@
                 </form>
             </li>
 
-            <li class="nav-item offset-sm-12" sec:authorize="isAuthenticated()">
+            <li class="nav-item offset-sm-12" sec:authorize="hasRole('ROLE_ADMIN')">
                 <form th:action="@{/food/add}" method="GET">
                     <button type="submit" class="btn btn-outline-success nav-link text-darkgreen border-1 border-darkgreen bg-white text-center active h5">
                         Добави храна
@@ -69,27 +69,10 @@
                 </form>
             </li>
 
-<!--            <li class="nav-item offset-sm-12" sec:authorize="isAuthenticated()">-->
-<!--                <form th:action="@{/users/update}" method="GET">-->
-<!--                    <button type="submit" class="btn btn-outline-success nav-link text-darkgreen border-1 border-darkgreen bg-white text-center active h5">-->
-<!--                        Допълни профила-->
-<!--                    </button>-->
-<!--                </form>-->
-<!--            </li>-->
-
-
-
-<!--            <li sec:authorize="isAuthenticated()" class="nav-item offset-sm-12">-->
-<!--                <form th:action="@{/logout}" method="POST">-->
-<!--                    <button type="submit" class="btn btn-outline-success nav-link text-darkgreen border-1 border-darkgreen bg-white text-center active h5">-->
-<!--                        Изход-->
-<!--                    </button>-->
-<!--                </form>-->
-<!--            </li>-->
         </ul>
 
 
-        <div  sec:authorize="isAuthenticated()" class="dropdown">
+        <div  sec:authorize="hasRole('ROLE_ADMIN')" class="dropdown">
             <button class="btn btn-secondary text-darkgreen border-1 bg-white dropdown-toggle" type="button" id="dropdownMenuButtonProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Профил
             </button>
