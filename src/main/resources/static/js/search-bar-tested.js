@@ -39,7 +39,12 @@ const displayFoods = (foods) => {
                     <div class="text-center">
                         <p class="card-text border-bottom ">Име: ${a.name}</p>
                         <p class="card-text border-bottom ">Марка: ${a.brand}</p>
-                        <p class="card-text border-bottom ">Магазин: ${a.store}</p>
+                         <p class="card-text border-bottom ">Магазин :
+                            <a class="text-lightgreen" href= "${a.store}">
+                                <img class="p-1" src= "${a.storelogoUrl}" alt="pic"
+                                     style="height: 50px; width: 50px;">
+                            </a>
+                        </p>
                           <p class="card-text border-bottom ">
 
                   ${a.nimaTested ?  '<img  src="../img/nima-logo.png" alt="pic" style="height: 50px; width: 50px;">' : ''}

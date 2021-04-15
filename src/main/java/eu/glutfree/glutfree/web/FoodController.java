@@ -93,14 +93,7 @@ public class FoodController {
         return modelAndView;
     }
 
-//    @GetMapping("/topvisitedfood")
-//    public ModelAndView topVisitedFoods(ModelAndView modelAndView) {
-//
-//        modelAndView.addObject("topthreeVisitedFood", this.logService.findTopThreeViewedFoods());
-//        modelAndView.setViewName("view-topVisitedFoods");
-//
-//        return modelAndView;
-//    }
+
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable Long id,

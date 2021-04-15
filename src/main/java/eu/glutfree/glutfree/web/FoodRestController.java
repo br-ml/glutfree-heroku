@@ -40,7 +40,7 @@ public class FoodRestController {
             stream().
             map(food -> {
               FoodViewModel viewModel = modelMapper.map(food, FoodViewModel.class);
-              viewModel.setStore(food.getStore().getName());
+              viewModel.setStore(food.getStore().getStoreWebSiteUrl());
               viewModel.setStorelogoUrl(food.getStore().getLogoUrl());
               return viewModel;
             }).
@@ -68,7 +68,7 @@ public class FoodRestController {
             stream().
             map(food -> {
               FoodViewModel viewModel = modelMapper.map(food, FoodViewModel.class);
-              viewModel.setStore(food.getStore().getName());
+              viewModel.setStore(food.getStore().getStoreWebSiteUrl());
               viewModel.setStorelogoUrl(food.getStore().getLogoUrl());
               return viewModel;
             }).

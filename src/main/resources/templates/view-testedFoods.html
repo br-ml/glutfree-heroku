@@ -11,7 +11,38 @@
     <section class="mainadd">
         <h1 class=" py-2 text-lightgreen border-bottom border-darkgreen">Тествани за глутен храни</h1>
 
-        <hr class="border-bottom w-75">
+        <div id="container-legend" style="white-space:nowrap">
+            <div class="font-weight-bold h5" id="text1" style="display:inline; white-space:nowrap;">
+                Легенда :
+            </div>
+            <div id="text2" style="display:inline; white-space:nowrap;">
+                Тествано с Нима :
+            </div>
+
+            <div class="pr-4" id="image2" style="display:inline;">
+                <img src="../img/nima-logo.png" alt="pic"
+                     style="height: 40px; width: 40px;">
+            </div>
+
+            <div id="text3" style="display:inline; white-space:nowrap;">
+                Отбелязано без глутен :
+            </div>
+
+            <div class="pr-4"  id="image3" style="display:inline;">
+                <img src="../img/GlutenFree-s-logo.png" alt="pic"
+                     style="height: 40px; width: 40px; ">
+            </div>
+
+            <div id="text4" style="display:inline; white-space:nowrap;">
+                Отбелязано без лактоза :
+            </div>
+
+            <div class="pr-4"  id="image4" style="display:inline;">
+                <img  src="../img/LactoseFree-s-logo.png" alt="pic"
+                      style="height: 40px; width: 40px;">
+            </div>
+
+        </div>
 
         <div class="mt-5 col-sm-12 my-auto align-self-center">
             <input id="searchInput" class="form-control mr-sm-2 w-50 " type="search"
@@ -29,7 +60,12 @@
                     <div class="text-center">
                         <p class="card-text border-bottom "th:text="|Име: *{name}|"></p>
                         <p class="card-text border-bottom "th:text="|Марка: *{brand}|" ></p>
-                        <a class="text-lightgreen" th:href= "*{store}">  <p class="card-text border-bottom "th:text="|Магазин: *{store}|" ></a>
+
+                            <p class="card-text border-bottom ">Магазин :
+                                <a class="text-lightgreen" th:href= "*{store}">
+                            <img class="p-1" th:src= "*{storelogoUrl}" alt="pic"
+                                 style="height: 50px; width: 50px;">
+                                </a>
                         </p>
                         <p class="card-text border-bottom " >
 

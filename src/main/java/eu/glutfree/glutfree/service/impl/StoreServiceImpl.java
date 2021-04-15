@@ -33,7 +33,7 @@ public class StoreServiceImpl implements StoreService {
         if( storeRepository.count() == 0 ) {
             StoreEntity lidl = new StoreEntity();
             lidl.setName("Лидл");
-            lidl.setLogoUrl("../img/Stores/Lidl-Logo.png");
+            lidl.setLogoUrl("/imga/Stores/Lidl-Logo.png");
             lidl.setStoreWebSiteUrl("https://lidl.bg");
 
             storeRepository.save(lidl);

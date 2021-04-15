@@ -30,7 +30,9 @@
 
                 <dt class="col-sm-3 text-lightgreen">Магазин: </dt>
                 <a  class="text-lightgreen" th:href= "*{store}">
-                <dd class="col-sm-9 text-lightgreen" th:text="| *{store}|">Магазин
+                <dd class="col-sm-9 text-lightgreen">
+                    <img class="p-1" th:src= "*{storelogoUrl}" alt="pic"
+                         style="height: 50px; width: 50px;">
                 </a></dd>
 
 

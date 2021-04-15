@@ -92,8 +92,13 @@ public class LogServiceImpl implements LogService {
     @Override
     public List<FoodViewModel> findTopThreeViewedFoods() {
         return this.logRepository.findTopThreefood().stream().map(foodId -> {
-            FoodViewModel foodViewModel = foodService.findById(foodId);
 
+
+            FoodViewModel foodViewModela = foodService.findById(foodId);
+            FoodViewModel foodViewModel = this.modelMapper.map( foodViewModela , FoodViewModel.class);
+
+//            foodViewModel.setStore(foodService.findById(foodId).getStore());
+//            foodViewModel.setStorelogoUrl(foodService.findById(foodId).get);
             return foodViewModel;
         }).collect(Collectors.toList());
 

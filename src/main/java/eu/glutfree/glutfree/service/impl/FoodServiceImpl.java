@@ -85,6 +85,9 @@ public class    FoodServiceImpl implements FoodService {
                 .map(foodEntity -> {
                     FoodViewModel foodViewModel = modelMapper
                             .map(foodEntity, FoodViewModel.class);
+
+                    foodViewModel.setStorelogoUrl(this.findEntityById(foodEntity.getId()).getStore().getLogoUrl());
+
                     return foodViewModel;
                 })
                 .orElseThrow(IllegalArgumentException::new);
