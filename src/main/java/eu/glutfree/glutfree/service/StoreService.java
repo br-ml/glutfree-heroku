@@ -10,7 +10,7 @@ public interface StoreService {
 
     void addStore (StoreAddServiceModel storeAddServiceModel);
 
-//    void seedStores();
+    void seedStores();
 
 
     StoreEntity findStoreByName(String name);
