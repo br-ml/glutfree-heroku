@@ -4,7 +4,6 @@ import eu.glutfree.glutfree.model.bindings.FoodAddBindingModel;
 import eu.glutfree.glutfree.model.service.FoodAddServiceModel;
 import eu.glutfree.glutfree.model.view.FoodViewModel;
 import eu.glutfree.glutfree.service.FoodService;
-import eu.glutfree.glutfree.service.LogService;
 import eu.glutfree.glutfree.service.StoreService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
@@ -30,13 +29,13 @@ public class FoodController {
     private final FoodService foodService;
     private final ModelMapper modelMapper;
     private final StoreService storeService;
-    private final LogService logService;
+//    private final LogService logService;
 
-    public FoodController(FoodService foodService, ModelMapper modelMapper, StoreService storeService, LogService logService) {
+    public FoodController(FoodService foodService, ModelMapper modelMapper, StoreService storeService) {
         this.foodService = foodService;
         this.modelMapper = modelMapper;
         this.storeService = storeService;
-        this.logService = logService;
+//        this.logService = logService;
     }
 
 
@@ -77,8 +76,10 @@ public class FoodController {
     public ModelAndView index(ModelAndView modelAndView) {
 
         modelAndView.addObject("foods", this.foodService.findAllFoods());
-//        modelAndView.addObject("topVisitedFood", this.logService.findTopViewedFoods());
-        modelAndView.addObject("topThreeVisitedFood", this.logService.findTopThreeViewedFoods());
+        modelAndView.addObject("latest6foods", this.foodService.findLatest6Foods());
+//        modelAndView.addObject("topThreeVisitedFood", this.logService.findTopThreeViewedFoods());
+
+
         modelAndView.setViewName("view-foods");
 
         return modelAndView;
@@ -87,7 +88,7 @@ public class FoodController {
     @GetMapping("/tested")
     public ModelAndView indexNima(ModelAndView modelAndView) {
 
-        modelAndView.addObject("testedFoods", this.foodService.findAllTestedFoods());
+        modelAndView.addObject("latest6testedFoods", this.foodService.findLatest6TestedFoods());
         modelAndView.setViewName("view-testedFoods");
 
         return modelAndView;
@@ -99,7 +100,7 @@ public class FoodController {
     public String delete(@PathVariable Long id,
                          Model model) {
 
-        logService.deleteAllById(id);
+//        logService.deleteAllById(id);
         foodService.delete(id);
 
 

@@ -12,4 +12,10 @@ public interface FoodRepository extends JpaRepository<FoodEntity, Long> {
 
 
         List<FoodEntity> findAllByNimaTestedIsTrue();
+
+        List<FoodEntity>  findTop6ByNimaTestedIsTrueOrderByIdDesc();
+        List<FoodEntity> findTop6ByIdIsNotNullOrderByIdDesc();
+
+
+
 }

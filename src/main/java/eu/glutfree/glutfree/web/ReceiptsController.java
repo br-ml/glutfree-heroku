@@ -63,7 +63,7 @@ public class ReceiptsController {
   @GetMapping("/")
   public ModelAndView index(ModelAndView modelAndView) {
 
-    modelAndView.addObject("receipts", this.receiptService.findAllReceipts());
+    modelAndView.addObject("receipts", this.receiptService.findLatestAdded6Receipts());
     modelAndView.setViewName("view-receipts");
 
     return modelAndView;

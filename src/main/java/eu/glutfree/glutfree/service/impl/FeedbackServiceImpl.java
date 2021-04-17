@@ -61,6 +61,16 @@ public class FeedbackServiceImpl implements FeedbackService {
     }
 
     @Override
+    public List<FeedbackViewModel> findLatestAdded6Feedbacks() {
+        return this.feedbackRepository.findTop6ByIdIsNotNullOrderByIdDesc().stream().map( feedbackEntity -> {
+            FeedbackViewModel feedbackViewModel = this.modelMapper.map( feedbackEntity , FeedbackViewModel.class);
+//            feedbackViewModel.setLogoPicture(String.format("/img/feedbacks/logo/%s.jpg", feedbackEntity.getName() ));
+            return feedbackViewModel;
+        }).collect(Collectors.toList());
+
+    }
+
+    @Override
     public void delete(Long id) {
         feedbackRepository.deleteById(id);
 

@@ -12,6 +12,7 @@ public interface ReceiptService {
     void addReceipt (ReceiptAddServiceModel receiptAddServiceModel) throws IOException;
 
     List<ReceiptViewModel> findAllReceipts();
+    List<ReceiptViewModel> findLatestAdded6Receipts();
 
     void delete(Long id);
 

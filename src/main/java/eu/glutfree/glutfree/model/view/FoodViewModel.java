@@ -3,12 +3,17 @@ package eu.glutfree.glutfree.model.view;
 import eu.glutfree.glutfree.model.entities.enums.TypeOfPlaceEnums;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDate;
+
 public class FoodViewModel {
 
     private Long id;
     private String name;
     private String brand;
     private String urlToPic;
+    private String urlToLabelImage;
+    private String pictureDate;
+    private String copyright;
     private boolean nimaTested;
     private boolean markedAsGF;
     private boolean withoutLactose;
@@ -89,5 +94,29 @@ public class FoodViewModel {
 
     public void setStorelogoUrl(String storelogoUrl) {
         this.storelogoUrl = storelogoUrl;
+    }
+
+    public String getUrlToLabelImage() {
+        return urlToLabelImage;
+    }
+
+    public void setUrlToLabelImage(String urlToLabelImage) {
+        this.urlToLabelImage = urlToLabelImage;
+    }
+
+    public String getPictureDate() {
+        return pictureDate;
+    }
+
+    public void setPictureDate(String pictureDate) {
+        this.pictureDate = pictureDate;
+    }
+
+    public String getCopyright() {
+        return copyright;
+    }
+
+    public void setCopyright(String copyright) {
+        this.copyright = copyright;
     }
 }

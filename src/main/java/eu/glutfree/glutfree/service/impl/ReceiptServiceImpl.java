@@ -62,6 +62,15 @@ public class ReceiptServiceImpl implements ReceiptService {
         }).collect(Collectors.toList());
     }
 
+    @Override
+    public List<ReceiptViewModel> findLatestAdded6Receipts() {
+
+        return this.receiptRepository.findTop6ByIdIsNotNullOrderByIdDesc().stream().map(recepitEntity -> {
+            ReceiptViewModel receiptViewModel = this.modelMapper.map(recepitEntity, ReceiptViewModel.class);
+            return receiptViewModel;
+        }).collect(Collectors.toList());
+    }
+
 
     @Override
     public void delete(Long id) {

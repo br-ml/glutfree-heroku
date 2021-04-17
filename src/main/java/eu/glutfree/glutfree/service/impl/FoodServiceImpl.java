@@ -5,10 +5,8 @@ import eu.glutfree.glutfree.model.entities.StoreEntity;
 import eu.glutfree.glutfree.model.service.FoodAddServiceModel;
 import eu.glutfree.glutfree.model.view.FoodViewModel;
 import eu.glutfree.glutfree.repository.FoodRepository;
-import eu.glutfree.glutfree.repository.LogRepository;
 import eu.glutfree.glutfree.service.CloudinaryService;
 import eu.glutfree.glutfree.service.FoodService;
-import eu.glutfree.glutfree.service.LogService;
 import eu.glutfree.glutfree.service.StoreService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -43,11 +41,14 @@ public class    FoodServiceImpl implements FoodService {
         MultipartFile img = foodAddServiceModel.getImage();
         String imageUrl = cloudinaryService.uploadImage(img);
 
+        MultipartFile imgLabel = foodAddServiceModel.getLabelImage();
+        String imageUrlLabel = cloudinaryService.uploadImage(imgLabel);
 
         FoodEntity food = modelMapper.map(foodAddServiceModel, FoodEntity.class);
         StoreEntity store = storeService.findStoreByName(foodAddServiceModel.getStore());
         food.setStore(store);
         food.setUrlToPic(imageUrl);
+        food.setUrlToLabelImage(imageUrlLabel);
         foodRepository.save(food);
     }
 
@@ -62,9 +63,20 @@ public class    FoodServiceImpl implements FoodService {
 
     }
 
+
     @Override
-    public List<FoodViewModel> findAllTestedFoods() {
-        return this.foodRepository.findAllByNimaTestedIsTrue().stream().map( foodEntity -> {
+    public List<FoodViewModel> findLatest6Foods() {
+        return this.foodRepository.findTop6ByIdIsNotNullOrderByIdDesc().stream().map(foodEntity -> {
+            FoodViewModel foodViewModel = this.modelMapper.map( foodEntity , FoodViewModel.class);
+            foodViewModel.setStorelogoUrl(foodEntity.getStore().getLogoUrl());
+            return foodViewModel;
+        }).collect(Collectors.toList());
+
+    }
+
+    @Override
+    public List<FoodViewModel> findLatest6TestedFoods() {
+        return this.foodRepository.findTop6ByNimaTestedIsTrueOrderByIdDesc().stream().map( foodEntity -> {
             FoodViewModel foodViewModel = this.modelMapper.map( foodEntity , FoodViewModel.class);
             foodViewModel.setStorelogoUrl(foodEntity.getStore().getLogoUrl());
             return foodViewModel;

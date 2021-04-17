@@ -12,6 +12,7 @@ public interface FeedbackService {
     void addFeedback (FeedbackAddServiceModel feedbackAddServiceModel) throws IOException;
 
     List<FeedbackViewModel> findAllFeedbacks();
+    List<FeedbackViewModel> findLatestAdded6Feedbacks();
 
     void delete(Long id);
 

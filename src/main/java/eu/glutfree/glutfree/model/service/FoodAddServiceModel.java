@@ -3,12 +3,18 @@ package eu.glutfree.glutfree.model.service;
 import eu.glutfree.glutfree.model.entities.StoreEntity;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDate;
+
 public class FoodAddServiceModel {
 
     private String name;
     private String brand;
     private String urlToPic;
+    private String copyright;
     private MultipartFile image;
+    private String urlToLabelImage;
+    private LocalDate pictureDate;
+    private MultipartFile labelImage;
     private boolean nimaTested;
     private boolean markedAsGF;
     private boolean withoutLactose;
@@ -79,5 +85,38 @@ public class FoodAddServiceModel {
 
     public void setImage(MultipartFile image) {
         this.image = image;
+    }
+
+    public String getUrlToLabelImage() {
+        return urlToLabelImage;
+    }
+
+    public void setUrlToLabelImage(String urlToLabelImage) {
+        this.urlToLabelImage = urlToLabelImage;
+    }
+
+
+    public LocalDate getPictureDate() {
+        return pictureDate;
+    }
+
+    public void setPictureDate(LocalDate pictureDate) {
+        this.pictureDate = pictureDate;
+    }
+
+    public MultipartFile getLabelImage() {
+        return labelImage;
+    }
+
+    public void setLabelImage(MultipartFile labelImage) {
+        this.labelImage = labelImage;
+    }
+
+    public String getCopyright() {
+        return copyright;
+    }
+
+    public void setCopyright(String copyright) {
+        this.copyright = copyright;
     }
 }

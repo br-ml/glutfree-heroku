@@ -15,7 +15,8 @@ public interface FoodService {
     List<FoodViewModel> findAllFoods();
 
 
-    List<FoodViewModel> findAllTestedFoods();
+    List<FoodViewModel> findLatest6TestedFoods();
+    List<FoodViewModel> findLatest6Foods();
 
     void delete(Long id);
 

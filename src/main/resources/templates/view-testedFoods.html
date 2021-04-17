@@ -52,7 +52,7 @@
     <div class="row">
         <div class="col-md-12 card-columns" id="foodList">
 <!--            <div class="card-deck">-->
-            <div th:each="a : ${testedFoods}" th:object="${a}" class="card mb-4 box-shadow bg-transparent">
+            <div th:each="a : ${latest6testedFoods}" th:object="${a}" class="card mb-4 box-shadow bg-transparent">
                 <img th:src="*{urlToPic}" class="card-img-top" alt="Thumbnail [100%x225]"
                      data-holder-rendered="true"
                      style="height: 225px; width: 200px;">

@@ -1,7 +1,10 @@
 package eu.glutfree.glutfree.model.entities;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
@@ -11,10 +14,12 @@ public class FoodEntity extends BaseEntity{
     private String name;
     private String brand;
     private String urlToPic;
+    private String copyright;
     private boolean nimaTested;
     private boolean markedAsGF = false;
     private boolean withoutLactose = false;
-//    private Set<StoreEntity> storeEntities;
+    private String urlToLabelImage;
+    private LocalDate pictureDate;
     private StoreEntity store;
 
 
@@ -39,15 +44,6 @@ public class FoodEntity extends BaseEntity{
         this.store = store;
     }
 
-    //    @ManyToMany
-//    @JoinTable(name = "foods_stores" , joinColumns = @JoinColumn(name = "food_id"), inverseJoinColumns = @JoinColumn(name = "store_id"))
-//    public Set<StoreEntity> getStores() {
-//        return storeEntities;
-//    }
-//
-//    public void setStores(Set<StoreEntity> storeEntities) {
-//        this.storeEntities = storeEntities;
-//    }
 
     @Column(name = "url_top_pic")
     public String getUrlToPic() {
@@ -67,15 +63,21 @@ public class FoodEntity extends BaseEntity{
         this.brand = brand;
     }
 
-//
-//    public String getShortDescription() {
-//        return shortDescription;
-//    }
-//
-//    public void setShortDescription(String shortDescription) {
-//        this.shortDescription = shortDescription;
-//    }
+    public String getUrlToLabelImage() {
+        return urlToLabelImage;
+    }
 
+    public void setUrlToLabelImage(String urlToLabelImage) {
+        this.urlToLabelImage = urlToLabelImage;
+    }
+
+    public LocalDate getPictureDate() {
+        return pictureDate;
+    }
+
+    public void setPictureDate(LocalDate pictureDate) {
+        this.pictureDate = pictureDate;
+    }
 
     public boolean isNimaTested() {
         return nimaTested;
@@ -99,5 +101,13 @@ public class FoodEntity extends BaseEntity{
 
     public void setWithoutLactose(boolean withoutLactose) {
         this.withoutLactose = withoutLactose;
+    }
+
+    public String getCopyright() {
+        return copyright;
+    }
+
+    public void setCopyright(String copyright) {
+        this.copyright = copyright;
     }
 }

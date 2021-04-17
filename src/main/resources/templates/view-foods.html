@@ -15,31 +15,21 @@
                 Легенда :
             </div>
             <div id="text2" style="display:inline; white-space:nowrap;">
-                Тествано с Нима :
-            </div>
-
+                Тествано с Нима :            </div>
             <div class="pr-4" id="image2" style="display:inline;">
-                <img src="../img/nima-logo.png" alt="pic"
-                     style="height: 40px; width: 40px;">
-            </div>
+                <img src="../img/nima-logo.png" alt="pic" style="height: 40px; width: 40px;">            </div>
 
             <div id="text3" style="display:inline; white-space:nowrap;">
-                Отбелязано без глутен :
-            </div>
-
+                Отбелязано без глутен :           </div>
             <div class="pr-4"  id="image3" style="display:inline;">
                 <img src="../img/GlutenFree-s-logo.png" alt="pic"
-                     style="height: 40px; width: 40px; ">
-            </div>
-
+                     style="height: 40px; width: 40px; ">            </div>
             <div id="text4" style="display:inline; white-space:nowrap;">
-                Отбелязано без лактоза :
-            </div>
+                Отбелязано без лактоза :            </div>
 
             <div class="pr-4"  id="image4" style="display:inline;">
                 <img  src="../img/LactoseFree-s-logo.png" alt="pic"
-                      style="height: 40px; width: 40px;">
-            </div>
+                      style="height: 40px; width: 40px;">            </div>
 
         </div>
         <div class="mt-5 col-sm-12 my-auto align-self-center">
@@ -47,10 +37,11 @@
                    placeholder="Търси по тип храна или име на магазин" aria-label="Search">
         </div>
         <hr class="border-bottom w-75">
-    <div class="row">
+        <h4 class="  text-lightgreen border-bottom border-darkgreen">Последно добавени храни:</h4>
+
+        <div class="row">
         <div class="col-md-12 card-columns" id="foodList">
-            <div th:each="a : ${topThreeVisitedFood}" th:object="${a}" class="card mb-4 box-shadow bg-transparent">
-                <p class="card-text border-bottom border-darkgreen font-weight-bold"th:text="|Една от най-разглежданите храни|"></p>
+            <div th:each="a : ${latest6foods}" th:object="${a}" class="card mb-4 box-shadow bg-transparent">
                 <a th:href="@{/food/details/{id}(id= *{id})}" >
                     <img  th:src="*{urlToPic}" class="card-img-top" alt="Thumbnail [100%x225]"
                      data-holder-rendered="true"

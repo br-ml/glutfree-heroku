@@ -63,6 +63,8 @@ body {
     padding-right: 50px;
 }
 
+/*.mainadd div dl dt*/
+
 .carouselExampleIndicators {
     height: 500px;
 }
@@ -205,4 +207,23 @@ input:invalid:required{
 
 .carousel-control-prev-icon {
     color: #566616;
+}
+
+
+
+/*// Image zoome*/
+* {box-sizing: border-box;}
+
+.img-magnifier-container {
+    position: relative;
+}
+
+.img-magnifier-glass {
+    position: absolute;
+    border: 3px solid #000;
+    border-radius: 50%;
+    cursor: none;
+    /*Set the size of the magnifier glass:*/
+    width: 100px;
+    height: 100px;
 }

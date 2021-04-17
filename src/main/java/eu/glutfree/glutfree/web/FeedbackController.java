@@ -65,7 +65,7 @@ public class FeedbackController {
     @GetMapping("/")
     public ModelAndView index(ModelAndView modelAndView) {
 
-            modelAndView.addObject("feedbacks", this.feedbackService.findAllFeedbacks());
+            modelAndView.addObject("feedbacks", this.feedbackService.findLatestAdded6Feedbacks());
             modelAndView.setViewName("view-feedbacks");
 
         return modelAndView;
