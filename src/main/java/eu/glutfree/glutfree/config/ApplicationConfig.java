@@ -1,15 +1,13 @@
 package eu.glutfree.glutfree.config;
 
-import com.cloudinary.Cloudinary;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.HashMap;
-import java.util.Map;
+
+
 
 @Configuration
 public class ApplicationConfig {
@@ -41,6 +39,8 @@ public class ApplicationConfig {
 //        config.put("api_secret", apiSecret);
 //        return new Cloudinary(config);
 //    }
+
+
 
 
 }
