@@ -28,17 +28,17 @@ public class StoreServiceImpl implements StoreService {
         storeRepository.save(store);
     }
 
-    @Override
-    public void seedStores() {
-        if( storeRepository.count() == 0 ) {
-            StoreEntity lidl = new StoreEntity();
-            lidl.setName("Лидл");
-            lidl.setLogoUrl("/imga/Stores/Lidl-Logo.png");
-            lidl.setStoreWebSiteUrl("https://lidl.bg");
-
-            storeRepository.save(lidl);
-        }
-    }
+//    @Override
+//    public void seedStores() {
+//        if( storeRepository.count() == 0 ) {
+//            StoreEntity lidl = new StoreEntity();
+//            lidl.setName("Лидл");
+//            lidl.setLogoUrl("/imga/Stores/Lidl-Logo.png");
+//            lidl.setStoreWebSiteUrl("https://lidl.bg");
+//
+//            storeRepository.save(lidl);
+//        }
+//    }
 
     @Override
     public StoreEntity findStoreByName(String name) {
