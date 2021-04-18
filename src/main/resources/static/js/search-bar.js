@@ -4,7 +4,7 @@ const foodList = document.getElementById('foodList');
 const searchBar = document.getElementById('searchInput');
 const allFoods = [];
 
-fetch("http://localhost:8080/food/api").
+fetch("https://localhost/food/api").
 then(response => response.json()).
 then(data => {
     for (let food of data) {

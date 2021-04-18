@@ -20,8 +20,7 @@ public class CloudConfig {
         }
 
         @Bean
-        public Cloudinary cloudinary(){
-            return  new Cloudinary(env.getProperty("CLOUDINARY_URL"));
+        public Cloudinary cloudinary(){return  new Cloudinary(env.getProperty("CLOUDINARY_URL"));
 
 //
 //                    new Cloudinary(ObjectUtils.asMap(
