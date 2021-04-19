@@ -64,7 +64,7 @@ public class FeedbackServiceImpl implements FeedbackService {
     public List<FeedbackViewModel> findLatestAdded6Feedbacks() {
         return this.feedbackRepository.findTop6ByIdIsNotNullOrderByIdDesc().stream().map( feedbackEntity -> {
             FeedbackViewModel feedbackViewModel = this.modelMapper.map( feedbackEntity , FeedbackViewModel.class);
-//            feedbackViewModel.setLogoPicture(String.format("/img/feedbacks/logo/%s.jpg", feedbackEntity.getName() ));
+//            feeddddsackViewModel.setLogoPicture(String.format("/img/feedbacks/logo/%s.jpg", feedbackEntity.getName() ));
             return feedbackViewModel;
         }).collect(Collectors.toList());
 
