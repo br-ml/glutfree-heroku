@@ -53,7 +53,7 @@ spring:
 
     database-platform: ${SPRING_JPA_DATABASE-PLATFORM:}
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     open-in-view: false
     properties:
       hibernate:
