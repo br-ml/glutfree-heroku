@@ -20,6 +20,9 @@ public class FoodViewModel {
     private String storelogoUrl;
     private String store;
 
+    private String details;
+    private boolean glutenTox;
+
 
     public FoodViewModel() {
     }

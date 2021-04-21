@@ -29,4 +29,5 @@ public interface UserService {
     void deleteRole(String username, String role);
 
 
+    void deleteUser(String username);
 }

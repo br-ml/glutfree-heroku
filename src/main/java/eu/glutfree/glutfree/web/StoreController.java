@@ -58,6 +58,11 @@ public class StoreController {
   }
 
 
+  @GetMapping("/anystore")
+  public String anystore() {
+    return "any-store";
+  }
+
 
 
 }
