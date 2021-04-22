@@ -122,4 +122,20 @@ public class FoodViewModel {
     public void setCopyright(String copyright) {
         this.copyright = copyright;
     }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
+    }
+
+    public boolean isGlutenTox() {
+        return glutenTox;
+    }
+
+    public void setGlutenTox(boolean glutenTox) {
+        this.glutenTox = glutenTox;
+    }
 }
