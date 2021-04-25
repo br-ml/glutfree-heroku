@@ -4,7 +4,7 @@ const foodList = document.getElementById('foodList');
 const searchBar = document.getElementById('searchInput');
 const allFoods = [];
 
-fetch("https://glutfree.herokuapp.com/food/api").
+fetch("https://www.glutfree.eu/food/api").
 then(response => response.json()).
 then(data => {
     for (let food of data) {
