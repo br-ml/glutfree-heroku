@@ -52,8 +52,8 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
-    padding-left: 50px;
-    padding-right: 50px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 
@@ -66,19 +66,12 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
-    padding-left: 50px;
-    padding-right: 50px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 /*.mainadd div dl dt*/
 
-.carouselExampleIndicators {
-    height: 500px;
-}
-
-.carousel-item img {
-    height: 500px;
-}
 
 #all-articles-jumbotron {
     background-image: url("/img/instruments.jpg");
