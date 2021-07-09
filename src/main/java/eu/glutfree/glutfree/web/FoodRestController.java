@@ -41,7 +41,8 @@ public class FoodRestController {
             map(food -> {
               FoodViewModel viewModel = modelMapper.map(food, FoodViewModel.class);
               viewModel.setStore(food.getStore().getStoreWebSiteUrl());
-              viewModel.setStorelogoUrl(food.getStore().getLogoUrl());
+                viewModel.setStoreName(food.getStore().getName());
+                viewModel.setStorelogoUrl(food.getStore().getLogoUrl());
               return viewModel;
             }).
             collect(Collectors.toList());
@@ -69,7 +70,8 @@ public class FoodRestController {
             map(food -> {
               FoodViewModel viewModel = modelMapper.map(food, FoodViewModel.class);
               viewModel.setStore(food.getStore().getStoreWebSiteUrl());
-              viewModel.setStorelogoUrl(food.getStore().getLogoUrl());
+                viewModel.setStoreName(food.getStore().getName());
+                viewModel.setStorelogoUrl(food.getStore().getLogoUrl());
               return viewModel;
             }).
             collect(Collectors.toList());

@@ -18,6 +18,7 @@ public class FoodViewModel {
     private boolean markedAsGF;
     private boolean withoutLactose;
     private String storelogoUrl;
+    private String storeName;
     private String store;
 
     private String details;
@@ -25,6 +26,14 @@ public class FoodViewModel {
 
 
     public FoodViewModel() {
+    }
+
+    public String getStoreName() {
+        return storeName;
+    }
+
+    public void setStoreName(String storeName) {
+        this.storeName = storeName;
     }
 
     public Long getId() {
