@@ -20,6 +20,8 @@ public class FoodViewModel {
     private String storelogoUrl;
     private String storeName;
     private String store;
+    private String category;
+
 
     private String details;
     private boolean glutenTox;
@@ -146,5 +148,13 @@ public class FoodViewModel {
 
     public void setGlutenTox(boolean glutenTox) {
         this.glutenTox = glutenTox;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }
