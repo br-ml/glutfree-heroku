@@ -27,6 +27,8 @@ public interface FoodService {
     List<FoodViewModel> findGFAndWithoutLactose();
     List<FoodViewModel> findAllByCategory(String category);
 
+    List<FoodViewModel> findAllTestedFoods();
+
 
 
 
