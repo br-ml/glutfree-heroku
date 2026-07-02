@@ -20,6 +20,7 @@ public class FoodViewModel {
     private String storelogoUrl;
     private String storeName;
     private String store;
+    private String storeWebSiteUrl;
     private String category;
 
 
@@ -108,6 +109,14 @@ public class FoodViewModel {
 
     public void setStorelogoUrl(String storelogoUrl) {
         this.storelogoUrl = storelogoUrl;
+    }
+
+    public String getStoreWebSiteUrl() {
+        return storeWebSiteUrl;
+    }
+
+    public void setStoreWebSiteUrl(String storeWebSiteUrl) {
+        this.storeWebSiteUrl = storeWebSiteUrl;
     }
 
     public String getUrlToLabelImage() {
