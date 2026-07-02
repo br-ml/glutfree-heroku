@@ -25,4 +25,9 @@ public class HomeController {
     public String aboutus() {
         return "aboutus";
     }
+
+    @GetMapping("/privacy-policy")
+    public String privacyPolicy() {
+        return "privacy-policy";
+    }
 }
