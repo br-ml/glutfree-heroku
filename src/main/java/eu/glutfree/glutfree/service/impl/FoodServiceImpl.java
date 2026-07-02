@@ -52,33 +52,35 @@ public class    FoodServiceImpl implements FoodService {
         foodRepository.save(food);
     }
 
-    private FoodViewModel mapToViewModel(FoodEntity foodEntity) {
-        FoodViewModel foodViewModel = this.modelMapper.map(foodEntity, FoodViewModel.class);
-        foodViewModel.setStorelogoUrl(foodEntity.getStore().getLogoUrl());
-        foodViewModel.setStoreName(foodEntity.getStore().getName());
-        foodViewModel.setStoreWebSiteUrl(foodEntity.getStore().getStoreWebSiteUrl());
-        return foodViewModel;
-    }
-
     @Override
     public List<FoodViewModel> findAllFoods() {
-        return this.foodRepository.findAll().stream()
-                .map(this::mapToViewModel)
-                .collect(Collectors.toList());
+        return this.foodRepository.findAll().stream().map( foodEntity -> {
+            FoodViewModel foodViewModel = this.modelMapper.map( foodEntity , FoodViewModel.class);
+            foodViewModel.setStorelogoUrl(foodEntity.getStore().getLogoUrl());
+            return foodViewModel;
+        }).collect(Collectors.toList());
+
     }
+
 
     @Override
     public List<FoodViewModel> findLatest6Foods() {
-        return this.foodRepository.findTop6ByIdIsNotNullOrderByIdDesc().stream()
-                .map(this::mapToViewModel)
-                .collect(Collectors.toList());
+        return this.foodRepository.findTop6ByIdIsNotNullOrderByIdDesc().stream().map(foodEntity -> {
+            FoodViewModel foodViewModel = this.modelMapper.map( foodEntity , FoodViewModel.class);
+            foodViewModel.setStorelogoUrl(foodEntity.getStore().getLogoUrl());
+            return foodViewModel;
+        }).collect(Collectors.toList());
+
     }
 
     @Override
     public List<FoodViewModel> findLatest6TestedFoods() {
-        return this.foodRepository.findTop6ByNimaTestedIsTrueOrderByIdDesc().stream()
-                .map(this::mapToViewModel)
-                .collect(Collectors.toList());
+        return this.foodRepository.findTop6ByNimaTestedIsTrueOrderByIdDesc().stream().map( foodEntity -> {
+            FoodViewModel foodViewModel = this.modelMapper.map( foodEntity , FoodViewModel.class);
+            foodViewModel.setStorelogoUrl(foodEntity.getStore().getLogoUrl());
+            return foodViewModel;
+        }).collect(Collectors.toList());
+
     }
 
 
@@ -91,7 +93,14 @@ public class    FoodServiceImpl implements FoodService {
     public FoodViewModel findById(Long id) {
         return foodRepository
                 .findById(id)
-                .map(this::mapToViewModel)
+                .map(foodEntity -> {
+                    FoodViewModel foodViewModel = modelMapper
+                            .map(foodEntity, FoodViewModel.class);
+
+                    foodViewModel.setStorelogoUrl(this.findEntityById(foodEntity.getId()).getStore().getLogoUrl());
+
+                    return foodViewModel;
+                })
                 .orElseThrow(IllegalArgumentException::new);
     }
 
@@ -105,23 +114,23 @@ public class    FoodServiceImpl implements FoodService {
 
     @Override
     public List<FoodViewModel> findGFAndWithoutLactose() {
-        return this.foodRepository.findAllByWithoutLactoseIsTrue().stream()
-                .map(this::mapToViewModel)
-                .collect(Collectors.toList());
+        return this.foodRepository.findAllByWithoutLactoseIsTrue().stream().map( foodEntity -> {
+            FoodViewModel foodViewModel = this.modelMapper.map( foodEntity , FoodViewModel.class);
+            foodViewModel.setStorelogoUrl(foodEntity.getStore().getLogoUrl());
+            return foodViewModel;
+        }).collect(Collectors.toList());
+
     }
 
     @Override
-    public List<FoodViewModel> findAllByCategory(String category) {
-        return this.foodRepository.findAllByCategoryEquals(category).stream()
-                .map(this::mapToViewModel)
-                .collect(Collectors.toList());
-    }
+    public List<FoodViewModel> findAllByCategory (String category) {
 
-    @Override
-    public List<FoodViewModel> findAllTestedFoods() {
-        return this.foodRepository.findAllByNimaTestedIsTrue().stream()
-                .map(this::mapToViewModel)
-                .collect(Collectors.toList());
+        return this.foodRepository.findAllByCategoryEquals(category).stream().map( foodEntity -> {
+            FoodViewModel foodViewModel = this.modelMapper.map( foodEntity , FoodViewModel.class);
+            foodViewModel.setStorelogoUrl(foodEntity.getStore().getLogoUrl());
+            return foodViewModel;
+        }).collect(Collectors.toList());
+
     }
 
     @Override
@@ -140,7 +149,6 @@ public class    FoodServiceImpl implements FoodService {
         List<FoodViewModel> listOfChokos = this.findAllByCategory(choko);
         listOfChokos.forEach((n) -> System.out.println(n.getName()));
     }
-
 
 
 
