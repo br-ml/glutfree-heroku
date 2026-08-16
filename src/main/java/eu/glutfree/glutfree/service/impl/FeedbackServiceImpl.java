@@ -1,10 +1,9 @@
 package eu.glutfree.glutfree.service.impl;
 
 import eu.glutfree.glutfree.model.entities.FeedbackEntity;
-import eu.glutfree.glutfree.model.entities.ReceiptEntity;
 import eu.glutfree.glutfree.model.service.FeedbackAddServiceModel;
+import eu.glutfree.glutfree.model.service.FeedbackEditServiceModel;
 import eu.glutfree.glutfree.model.view.FeedbackViewModel;
-import eu.glutfree.glutfree.model.view.FoodViewModel;
 import eu.glutfree.glutfree.repository.FeedbackRepository;
 import eu.glutfree.glutfree.service.CloudinaryService;
 import eu.glutfree.glutfree.service.FeedbackService;
@@ -68,6 +67,25 @@ public class FeedbackServiceImpl implements FeedbackService {
             return feedbackViewModel;
         }).collect(Collectors.toList());
 
+    }
+
+    @Override
+    public FeedbackEntity findEntityById(Long id) {
+        return feedbackRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+    }
+
+    @Override
+    public void updateFeedback(Long id, FeedbackEditServiceModel model) throws IOException {
+        FeedbackEntity feedback = feedbackRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+        feedback.setName(model.getName());
+        feedback.setScore(model.getScore());
+        feedback.setFeedbackText(model.getFeedbackText());
+        feedback.setWebSiteUrl(model.getWebSiteUrl());
+        feedback.setTypeOfPlace(model.getTypeOfPlace());
+        if (model.getImage() != null && !model.getImage().isEmpty()) {
+            feedback.setUrlToPic(cloudinaryService.uploadImage(model.getImage()));
+        }
+        feedbackRepository.save(feedback);
     }
 
     @Override

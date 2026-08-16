@@ -1,7 +1,8 @@
 package eu.glutfree.glutfree.service;
 
+import eu.glutfree.glutfree.model.entities.FeedbackEntity;
 import eu.glutfree.glutfree.model.service.FeedbackAddServiceModel;
-import eu.glutfree.glutfree.model.service.FoodAddServiceModel;
+import eu.glutfree.glutfree.model.service.FeedbackEditServiceModel;
 import eu.glutfree.glutfree.model.view.FeedbackViewModel;
 
 import java.io.IOException;
@@ -17,5 +18,7 @@ public interface FeedbackService {
     void delete(Long id);
 
     FeedbackViewModel findById(Long id);
+    FeedbackEntity findEntityById(Long id);
+    void updateFeedback(Long id, FeedbackEditServiceModel model) throws IOException;
 
 }

@@ -1,7 +1,9 @@
 package eu.glutfree.glutfree.web;
 
 import eu.glutfree.glutfree.model.bindings.FeedbackAddBindingModel;
+import eu.glutfree.glutfree.model.bindings.FeedbackEditBindingModel;
 import eu.glutfree.glutfree.model.service.FeedbackAddServiceModel;
+import eu.glutfree.glutfree.model.service.FeedbackEditServiceModel;
 import eu.glutfree.glutfree.model.view.FeedbackViewModel;
 import eu.glutfree.glutfree.model.view.ReceiptViewModel;
 import eu.glutfree.glutfree.service.FeedbackService;
@@ -69,6 +71,32 @@ public class FeedbackController {
             modelAndView.setViewName("view-feedbacks");
 
         return modelAndView;
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editFeedback(@PathVariable Long id, Model model) {
+        eu.glutfree.glutfree.model.entities.FeedbackEntity entity = feedbackService.findEntityById(id);
+        if (!model.containsAttribute("feedbackEditBindingModel")) {
+            FeedbackEditBindingModel bindingModel = modelMapper.map(entity, FeedbackEditBindingModel.class);
+            model.addAttribute("feedbackEditBindingModel", bindingModel);
+        }
+        model.addAttribute("feedbackId", id);
+        model.addAttribute("currentImageUrl", entity.getUrlToPic());
+        return "edit-feedback";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String editConfirm(@PathVariable Long id,
+                              @Valid FeedbackEditBindingModel feedbackEditBindingModel,
+                              BindingResult bindingResult,
+                              RedirectAttributes redirectAttributes) throws IOException {
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("feedbackEditBindingModel", feedbackEditBindingModel);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.feedbackEditBindingModel", bindingResult);
+            return "redirect:/feedback/edit/" + id;
+        }
+        feedbackService.updateFeedback(id, modelMapper.map(feedbackEditBindingModel, FeedbackEditServiceModel.class));
+        return "redirect:/feedback/";
     }
 
     @GetMapping("/delete/{id}")

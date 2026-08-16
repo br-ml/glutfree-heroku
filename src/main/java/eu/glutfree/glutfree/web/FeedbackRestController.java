@@ -2,6 +2,7 @@ package eu.glutfree.glutfree.web;
 
 import eu.glutfree.glutfree.model.entities.enums.TypeOfPlaceEnums;
 import eu.glutfree.glutfree.model.service.FeedbackAddServiceModel;
+import eu.glutfree.glutfree.model.service.FeedbackEditServiceModel;
 import eu.glutfree.glutfree.model.view.FeedbackViewModel;
 import eu.glutfree.glutfree.service.FeedbackService;
 import org.modelmapper.ModelMapper;
@@ -57,6 +58,28 @@ public class FeedbackRestController {
         model.setTypeOfPlace(typeOfPlace);
         model.setImage(image);
         feedbackService.addFeedback(model);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/api/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Void> updateFeedback(
+            @PathVariable Long id,
+            @RequestParam String name,
+            @RequestParam int score,
+            @RequestParam String feedbackText,
+            @RequestParam(required = false) String webSiteUrl,
+            @RequestParam(required = false) TypeOfPlaceEnums typeOfPlace,
+            @RequestParam(required = false) MultipartFile image) throws IOException {
+
+        FeedbackEditServiceModel model = new FeedbackEditServiceModel();
+        model.setName(name);
+        model.setScore(score);
+        model.setFeedbackText(feedbackText);
+        model.setWebSiteUrl(webSiteUrl);
+        model.setTypeOfPlace(typeOfPlace);
+        model.setImage(image);
+        feedbackService.updateFeedback(id, model);
         return ResponseEntity.ok().build();
     }
 

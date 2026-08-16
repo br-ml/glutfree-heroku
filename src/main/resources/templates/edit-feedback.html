@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="frags/head"></head>
+<body>
+<header>
+    <nav th:replace="frags/navbar"></nav>
+</header>
+
+<main class="p-1 text-center">
+    <section class="mainadd">
+    <h1 class=" py-2 text-lightgreen border-bottom border-darkgreen">Редактирай Обратна Връзка</h1>
+    <div class=" py-2 d-flex justify-content-center">
+        <form th:action="@{/feedback/edit/{id}(id=${feedbackId})}" method="POST"
+              th:object="${feedbackEditBindingModel}"
+              class="text-light" enctype="multipart/form-data">
+
+            <div class="form-row m-5 text-lightgreen">
+                <div class="col">
+                    <label for="name">Име на обекта</label>
+                    <input id="name" th:value="*{name}" th:errorclass="bg-danger" name="name"
+                           required minlength="2" maxlength="50" type="text" class="form-control" placeholder="Име">
+                    <small th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="form-text bg-danger rounded"></small>
+                </div>
+                <div class="col">
+                    <label for="imageaa">Нова снимка (оставете празно за да запазите текущата)</label>
+                    <div th:if="${currentImageUrl != null}" class="mb-2">
+                        <img th:src="${currentImageUrl}" alt="current" style="height: 80px; width: 80px; object-fit: cover;">
+                    </div>
+                    <input type="file" class="form-control-file" id="imageaa" name="image">
+                </div>
+            </div>
+
+            <div class="form-row m-5 text-lightgreen">
+                <div class="col">
+                    <label for="score">Колко точки даваш (1-5)</label>
+                    <input id="score" th:value="*{score}" th:errorclass="bg-danger" name="score"
+                           required min="1" max="5" type="number" class="form-control">
+                    <small th:if="${#fields.hasErrors('score')}" th:errors="*{score}" class="form-text bg-danger rounded"></small>
+                </div>
+                <div class="col">
+                    <label for="typeOfPlace">Тип Обект</label>
+                    <select name="typeOfPlace" id="typeOfPlace" class="custom-select">
+                        <option th:each="ty : ${T(eu.glutfree.glutfree.model.entities.enums.TypeOfPlaceEnums).values()}"
+                                th:text="${ty}"
+                                th:value="${ty}"
+                                th:selected="${ty} == *{typeOfPlace}">
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row m-5 text-lightgreen">
+                <div class="col">
+                    <label for="webSiteUrl">Страница</label>
+                    <input id="webSiteUrl" th:value="*{webSiteUrl}" name="webSiteUrl"
+                           type="text" class="form-control" placeholder="Страница">
+                </div>
+            </div>
+
+            <div class="form-row m-5 text-lightgreen">
+                <div class="col">
+                    <label for="feedbackText">Обратна връзка</label>
+                    <textarea id="feedbackText" name="feedbackText" th:text="*{feedbackText}"
+                              required minlength="5" maxlength="1000"
+                              class="form-control" style="height: 126px;"></textarea>
+                    <small th:if="${#fields.hasErrors('feedbackText')}" th:errors="*{feedbackText}" class="form-text bg-danger rounded"></small>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-center mt-4">
+                <button class="btn btn-primary btn-block w-50" type="submit">Запази</button>
+            </div>
+        </form>
+    </div>
+    </section>
+</main>
+<footer th:replace="frags/footer"></footer>
+</body>
+</html>
