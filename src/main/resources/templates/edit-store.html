@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="frags/head"></head>
+<body>
+<header>
+    <nav th:replace="frags/navbar"></nav>
+</header>
+
+<main class="p-1 text-center">
+    <section class="mainadd">
+        <h1 class="py-2 text-lightgreen border-bottom border-darkgreen">Редактирай Магазин</h1>
+        <div class="py-2 d-flex justify-content-center">
+            <form th:action="@{/store/edit/{id}(id=${storeId})}" method="POST"
+                  th:object="${storeAddBindingModel}"
+                  class="text-light">
+
+                <div class="form-row m-5 text-lightgreen">
+                    <div class="col">
+                        <label for="name">Име на Магазина</label>
+                        <input id="name" th:value="*{name}" th:errorclass="bg-danger" name="name" type="text"
+                               class="form-control" placeholder="Име">
+                        <small th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                               class="form-text bg-danger rounded">Името трябва да е между 3 и 20 символа</small>
+                    </div>
+                    <div class="col">
+                        <label for="storeWebSiteUrl">Store Web Site</label>
+                        <input id="storeWebSiteUrl" th:value="*{storeWebSiteUrl}" th:errorclass="bg-danger"
+                               name="storeWebSiteUrl" type="text" class="form-control" placeholder="Web Site">
+                        <small th:if="${#fields.hasErrors('storeWebSiteUrl')}" th:errors="*{storeWebSiteUrl}"
+                               class="form-text bg-danger rounded">Невалиден URL</small>
+                    </div>
+                </div>
+
+                <div class="form-row m-5 text-lightgreen">
+                    <div class="col">
+                        <label for="logoUrl">Лого URL</label>
+                        <input id="logoUrl" th:value="*{logoUrl}" th:errorclass="bg-danger" name="logoUrl" type="text"
+                               class="form-control" placeholder="Лого URL">
+                        <small th:if="${#fields.hasErrors('logoUrl')}" th:errors="*{logoUrl}"
+                               class="form-text bg-danger rounded">Невалиден URL</small>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center mt-4">
+                    <button class="btn btn-primary btn-block w-50" type="submit">Запази</button>
+                </div>
+            </form>
+        </div>
+    </section>
+</main>
+
+<footer th:replace="frags/footer"></footer>
+</body>
+</html>

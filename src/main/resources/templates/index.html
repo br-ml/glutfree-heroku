@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="frags/head"></head>
 
 <body>
@@ -76,6 +77,11 @@
                 <img src="../img/lactoseFree_black.png" alt="pic">
                 <h3>Без глутен и лактоза</h3></a>
                 <p>Продукти отбелязани както без глутен така и без лактоза.</p>
+            </li>
+            <li sec:authorize="hasRole('ROLE_ADMIN')"><a href="/store/">
+                <img src="../img/category-iconS.png" alt="pic">
+                <h3>Магазини</h3></a>
+                <p>Управление на магазините в портала.</p>
             </li>
         </ul>
     </section>

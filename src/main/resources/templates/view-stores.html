@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="frags/head"></head>
+<body>
+<header>
+    <nav th:replace="frags/navbar"></nav>
+</header>
+
+<main class="p-1 text-center">
+    <h1 class="py-2 text-lightgreen border-bottom border-darkgreen">Магазини</h1>
+
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div th:each="store : ${stores}" class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <img th:if="${store.logoUrl != null and !store.logoUrl.isEmpty()}"
+                             th:src="${store.logoUrl}" alt="лого"
+                             style="height: 80px; width: 100%; object-fit: contain; margin-bottom: 10px;">
+                        <h5 class="card-title" th:text="${store.name}"></h5>
+                        <a th:if="${store.storeWebSiteUrl != null and !store.storeWebSiteUrl.isEmpty()}"
+                           th:href="${store.storeWebSiteUrl}" target="_blank" class="btn btn-sm btn-outline-secondary mb-2">Сайт</a>
+
+                        <div sec:authorize="hasRole('ROLE_ADMIN')" class="mt-2">
+                            <a th:href="@{/store/edit/{id}(id=${store.id})}"
+                               class="btn btn-sm btn-outline-warning">Редактирай</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div sec:authorize="hasRole('ROLE_ADMIN')" class="mt-3 mb-4">
+            <a href="/store/add" class="btn btn-outline-success">Добави Магазин</a>
+        </div>
+    </div>
+</main>
+
+<footer th:replace="frags/footer"></footer>
+</body>
+</html>

@@ -52,6 +52,20 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
+    public StoreEntity findStoreById(Long id) {
+        return storeRepository.findById(id).orElseThrow(() -> new StoreNotFoundException("Store not found!"));
+    }
+
+    @Override
+    public void updateStore(Long id, StoreAddServiceModel model) {
+        StoreEntity store = findStoreById(id);
+        store.setName(model.getName());
+        store.setStoreWebSiteUrl(model.getStoreWebSiteUrl());
+        store.setLogoUrl(model.getLogoUrl());
+        storeRepository.save(store);
+    }
+
+    @Override
     public List<StoreViewModel> findAllStoreDetails() {
         return storeRepository.findAll().stream()
                 .map(store -> modelMapper.map(store, StoreViewModel.class))

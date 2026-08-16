@@ -24,6 +24,13 @@ public class StoreRestController {
         return ResponseEntity.ok(storeService.findAllStoreDetails());
     }
 
+    @PutMapping("/api/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Void> updateStore(@PathVariable Long id, @RequestBody StoreAddServiceModel model) {
+        storeService.updateStore(id, model);
+        return ResponseEntity.ok().build();
+    }
+
     @PostMapping("/api")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> addStore(@RequestBody StoreAddServiceModel model) {

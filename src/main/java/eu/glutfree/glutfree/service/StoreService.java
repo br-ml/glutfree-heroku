@@ -19,5 +19,7 @@ public interface StoreService {
     List<String> findAllStores();
 
     List<StoreViewModel> findAllStoreDetails();
+    StoreEntity findStoreById(Long id);
+    void updateStore(Long id, StoreAddServiceModel model);
 }
 
