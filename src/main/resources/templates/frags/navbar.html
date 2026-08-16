@@ -15,6 +15,11 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
+    <a sec:authorize="hasRole('ROLE_ADMIN')" href="/food/add"
+       class="btn btn-outline-success text-darkgreen border-darkgreen bg-white d-lg-none ml-2">
+        Добави храна
+    </a>
+
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto align-items-center">
 
