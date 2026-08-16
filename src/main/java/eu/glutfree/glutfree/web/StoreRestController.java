@@ -31,6 +31,13 @@ public class StoreRestController {
         return ResponseEntity.ok().build();
     }
 
+    @DeleteMapping("/api/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Void> deleteStore(@PathVariable Long id) {
+        storeService.deleteStore(id);
+        return ResponseEntity.noContent().build();
+    }
+
     @PostMapping("/api")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> addStore(@RequestBody StoreAddServiceModel model) {

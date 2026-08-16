@@ -66,6 +66,11 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
+    public void deleteStore(Long id) {
+        storeRepository.deleteById(id);
+    }
+
+    @Override
     public List<StoreViewModel> findAllStoreDetails() {
         return storeRepository.findAll().stream()
                 .map(store -> modelMapper.map(store, StoreViewModel.class))

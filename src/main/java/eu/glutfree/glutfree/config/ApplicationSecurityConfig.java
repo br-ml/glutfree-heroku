@@ -1,7 +1,9 @@
 package eu.glutfree.glutfree.config;
 
 import eu.glutfree.glutfree.service.impl.GlutfreeDBUserService;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -21,10 +23,17 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         this.passwordEncoder = passwordEncoder;
     }
 
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         http.
+                csrf().ignoringAntMatchers("/users/api/**", "/food/api/**", "/feedback/api/**", "/store/api/**").and().
                 cors().and().
                 authorizeRequests().
                 antMatchers("/js/**", "/css/**", "/img/**", "/img/categories/**").permitAll().
@@ -32,7 +41,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 antMatchers("/", "/users/login", "/blog", "/food/**", "/food/category/*", "/food/api", "/food/api-tested", "/food/", "/feedback/api", "/food/details/*", "/receipt/", "/receipt/api", "/receipt/**", "/feedback/", "/aboutus", "/privacy-policy", "/store/anystore", "/store/", "/store/api/**").permitAll().
                 // public REST API endpoints
                 antMatchers(org.springframework.http.HttpMethod.GET, "/food/api/**", "/food/api-tested", "/feedback/api/**", "/receipt/api/**", "/store/api/**").permitAll().
-                antMatchers(org.springframework.http.HttpMethod.POST, "/users/api/register").permitAll().
+                antMatchers(org.springframework.http.HttpMethod.POST, "/users/api/register", "/users/api/login").permitAll().
                 antMatchers("/**").authenticated().
 
                 and().

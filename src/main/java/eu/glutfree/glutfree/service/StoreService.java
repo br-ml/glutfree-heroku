@@ -21,5 +21,6 @@ public interface StoreService {
     List<StoreViewModel> findAllStoreDetails();
     StoreEntity findStoreById(Long id);
     void updateStore(Long id, StoreAddServiceModel model);
+    void deleteStore(Long id);
 }
 
