@@ -52,6 +52,16 @@ public class FoodRestController {
         return ResponseEntity.ok(foodService.findGFAndWithoutLactose());
     }
 
+    @GetMapping("/api/gluten-tox")
+    public ResponseEntity<List<FoodViewModel>> findGlutenTox() {
+        return ResponseEntity.ok(foodService.findAllGlutenToxFoods());
+    }
+
+    @GetMapping("/api/marked-as-gf")
+    public ResponseEntity<List<FoodViewModel>> findMarkedAsGF() {
+        return ResponseEntity.ok(foodService.findAllMarkedAsGFFoods());
+    }
+
     @PostMapping("/api")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> addFood(
@@ -86,6 +96,44 @@ public class FoodRestController {
             model.setPictureDate(LocalDate.parse(pictureDate));
         }
         foodService.addFood(model);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/api/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Void> updateFood(
+            @PathVariable Long id,
+            @RequestParam String name,
+            @RequestParam String brand,
+            @RequestParam(required = false) String copyright,
+            @RequestParam(required = false) String details,
+            @RequestParam(required = false) String category,
+            @RequestParam String store,
+            @RequestParam(defaultValue = "false") boolean nimaTested,
+            @RequestParam(defaultValue = "false") boolean markedAsGF,
+            @RequestParam(defaultValue = "false") boolean withoutLactose,
+            @RequestParam(defaultValue = "false") boolean glutenTox,
+            @RequestParam(required = false) String pictureDate,
+            @RequestParam(required = false) MultipartFile image,
+            @RequestParam(required = false) MultipartFile labelImage) throws IOException {
+
+        eu.glutfree.glutfree.model.service.FoodEditServiceModel model = new eu.glutfree.glutfree.model.service.FoodEditServiceModel();
+        model.setName(name);
+        model.setBrand(brand);
+        model.setCopyright(copyright);
+        model.setDetails(details);
+        model.setCategory(category);
+        model.setStore(store);
+        model.setNimaTested(nimaTested);
+        model.setMarkedAsGF(markedAsGF);
+        model.setWithoutLactose(withoutLactose);
+        model.setGlutenTox(glutenTox);
+        model.setImage(image);
+        model.setLabelImage(labelImage);
+        if (pictureDate != null && !pictureDate.isEmpty()) {
+            model.setPictureDate(java.time.LocalDate.parse(pictureDate));
+        }
+        foodService.updateFood(id, model);
         return ResponseEntity.ok().build();
     }
 

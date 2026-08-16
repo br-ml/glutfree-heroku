@@ -2,6 +2,7 @@ package eu.glutfree.glutfree.service;
 
 import eu.glutfree.glutfree.model.entities.FoodEntity;
 import eu.glutfree.glutfree.model.service.FoodAddServiceModel;
+import eu.glutfree.glutfree.model.service.FoodEditServiceModel;
 import eu.glutfree.glutfree.model.view.FeedbackViewModel;
 import eu.glutfree.glutfree.model.view.FoodViewModel;
 
@@ -11,6 +12,7 @@ import java.util.List;
 public interface FoodService {
 
     void addFood (FoodAddServiceModel foodAddServiceModel) throws IOException;
+    void updateFood(Long id, FoodEditServiceModel model) throws IOException;
 
     List<FoodViewModel> findAllFoods();
 
@@ -28,6 +30,8 @@ public interface FoodService {
     List<FoodViewModel> findAllByCategory(String category);
 
     List<FoodViewModel> findAllTestedFoods();
+    List<FoodViewModel> findAllGlutenToxFoods();
+    List<FoodViewModel> findAllMarkedAsGFFoods();
 
 
 

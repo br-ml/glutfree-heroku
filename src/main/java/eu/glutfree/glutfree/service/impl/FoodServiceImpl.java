@@ -3,6 +3,7 @@ package eu.glutfree.glutfree.service.impl;
 import eu.glutfree.glutfree.model.entities.FoodEntity;
 import eu.glutfree.glutfree.model.entities.StoreEntity;
 import eu.glutfree.glutfree.model.service.FoodAddServiceModel;
+import eu.glutfree.glutfree.model.service.FoodEditServiceModel;
 import eu.glutfree.glutfree.model.view.FoodViewModel;
 import eu.glutfree.glutfree.repository.FoodRepository;
 import eu.glutfree.glutfree.service.CloudinaryService;
@@ -85,6 +86,29 @@ public class    FoodServiceImpl implements FoodService {
 
 
     @Override
+    public void updateFood(Long id, FoodEditServiceModel model) throws IOException {
+        FoodEntity food = foodRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+        food.setName(model.getName());
+        food.setBrand(model.getBrand());
+        food.setCopyright(model.getCopyright());
+        food.setDetails(model.getDetails());
+        food.setCategory(model.getCategory());
+        food.setPictureDate(model.getPictureDate());
+        food.setNimaTested(model.isNimaTested());
+        food.setMarkedAsGF(model.isMarkedAsGF());
+        food.setWithoutLactose(model.isWithoutLactose());
+        food.setGlutenTox(model.isGlutenTox());
+        food.setStore(storeService.findStoreByName(model.getStore()));
+        if (model.getImage() != null && !model.getImage().isEmpty()) {
+            food.setUrlToPic(cloudinaryService.uploadImage(model.getImage()));
+        }
+        if (model.getLabelImage() != null && !model.getLabelImage().isEmpty()) {
+            food.setUrlToLabelImage(cloudinaryService.uploadImage(model.getLabelImage()));
+        }
+        foodRepository.save(food);
+    }
+
+    @Override
     public void delete(Long id) {
         foodRepository.deleteById(id);
     }
@@ -136,6 +160,28 @@ public class    FoodServiceImpl implements FoodService {
     @Override
     public List<FoodViewModel> findAllTestedFoods() {
         return this.foodRepository.findAllByNimaTestedIsTrue().stream().map(foodEntity -> {
+            FoodViewModel foodViewModel = this.modelMapper.map(foodEntity, FoodViewModel.class);
+            foodViewModel.setStorelogoUrl(foodEntity.getStore().getLogoUrl());
+            foodViewModel.setStoreName(foodEntity.getStore().getName());
+            foodViewModel.setStore(foodEntity.getStore().getStoreWebSiteUrl());
+            return foodViewModel;
+        }).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<FoodViewModel> findAllMarkedAsGFFoods() {
+        return this.foodRepository.findAllByMarkedAsGFIsTrue().stream().map(foodEntity -> {
+            FoodViewModel foodViewModel = this.modelMapper.map(foodEntity, FoodViewModel.class);
+            foodViewModel.setStorelogoUrl(foodEntity.getStore().getLogoUrl());
+            foodViewModel.setStoreName(foodEntity.getStore().getName());
+            foodViewModel.setStore(foodEntity.getStore().getStoreWebSiteUrl());
+            return foodViewModel;
+        }).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<FoodViewModel> findAllGlutenToxFoods() {
+        return this.foodRepository.findAllByGlutenToxIsTrue().stream().map(foodEntity -> {
             FoodViewModel foodViewModel = this.modelMapper.map(foodEntity, FoodViewModel.class);
             foodViewModel.setStorelogoUrl(foodEntity.getStore().getLogoUrl());
             foodViewModel.setStoreName(foodEntity.getStore().getName());

@@ -1,7 +1,9 @@
 package eu.glutfree.glutfree.web;
 
 import eu.glutfree.glutfree.model.bindings.FoodAddBindingModel;
+import eu.glutfree.glutfree.model.bindings.FoodEditBindingModel;
 import eu.glutfree.glutfree.model.service.FoodAddServiceModel;
+import eu.glutfree.glutfree.model.service.FoodEditServiceModel;
 import eu.glutfree.glutfree.model.view.FoodViewModel;
 import eu.glutfree.glutfree.service.FoodService;
 import eu.glutfree.glutfree.service.StoreService;
@@ -95,6 +97,34 @@ public class FoodController {
     }
 
 
+
+    @GetMapping("/edit/{id}")
+    public String editFood(@PathVariable Long id, Model model) {
+        FoodViewModel food = foodService.findById(id);
+        FoodEditBindingModel bindingModel = modelMapper.map(food, FoodEditBindingModel.class);
+        if (!model.containsAttribute("foodEditBindingModel")) {
+            model.addAttribute("foodEditBindingModel", bindingModel);
+        }
+        model.addAttribute("foodId", id);
+        model.addAttribute("currentImageUrl", food.getUrlToPic());
+        model.addAttribute("currentLabelImageUrl", food.getUrlToLabelImage());
+        model.addAttribute("stores", storeService.findAllStores());
+        return "edit-food";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String editConfirm(@PathVariable Long id,
+                              @Valid FoodEditBindingModel foodEditBindingModel,
+                              BindingResult bindingResult,
+                              RedirectAttributes redirectAttributes) throws IOException {
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("foodEditBindingModel", foodEditBindingModel);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.foodEditBindingModel", bindingResult);
+            return "redirect:/food/edit/" + id;
+        }
+        foodService.updateFood(id, modelMapper.map(foodEditBindingModel, FoodEditServiceModel.class));
+        return "redirect:/food/";
+    }
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable Long id,

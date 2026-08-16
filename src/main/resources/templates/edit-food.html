@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="frags/head"></head>
+<body>
+<header>
+    <nav th:replace="frags/navbar"></nav>
+</header>
+
+<main class="p-1 text-center">
+    <section class="mainadd">
+    <h1 class=" py-2 text-lightgreen border-bottom border-darkgreen">Редактирай Храна</h1>
+    <div class=" py-2 d-flex justify-content-center">
+        <form th:action="@{/food/edit/{id}(id=${foodId})}" method="POST"
+              th:object="${foodEditBindingModel}"
+              class="text-light" enctype="multipart/form-data">
+
+            <div class="form-row m-5 text-lightgreen">
+                <div class="col ">
+                    <label for="name">Име на Храната</label>
+                    <input id="name" th:value="*{name}" th:errorclass="bg-danger" name="name" required minlength="2" maxlength="90"
+                           type="text" class="form-control" placeholder="Име">
+                    <small th:if="${#fields.hasErrors('name')}" th:errors="*{name}" id="nameError" class="form-text bg-danger rounded"></small>
+                </div>
+                <div class="col">
+                    <label for="brand">Марка</label>
+                    <input id="brand" th:value="*{brand}" th:errorclass="bg-danger" name="brand" required minlength="2" maxlength="50" type="text" class="form-control" placeholder="Марка">
+                    <small th:if="${#fields.hasErrors('brand')}" th:errors="*{brand}" id="brandError" class="form-text bg-danger rounded"></small>
+                </div>
+            </div>
+
+            <div class="form-row m-5 text-lightgreen ">
+                <div class="col">
+                    <label for="imageaa">Нова снимка на продукта (оставете празно за да запазите текущата)</label>
+                    <div th:if="${currentImageUrl != null}" class="mb-2">
+                        <img th:src="${currentImageUrl}" alt="current" style="height: 80px; width: 80px; object-fit: cover;">
+                    </div>
+                    <input type="file" class="form-control-file" id="imageaa" name="image" placeholder="Снимка на продукта">
+                </div>
+                <div class="col">
+                    <label for="imageaalable">Нова снимка на етикета (оставете празно за да запазите текущата)</label>
+                    <div th:if="${currentLabelImageUrl != null}" class="mb-2">
+                        <img th:src="${currentLabelImageUrl}" alt="current label" style="height: 80px; width: 80px; object-fit: cover;">
+                    </div>
+                    <input type="file" class="form-control-file" id="imageaalable" name="labelImage" placeholder="Снимка на етикета">
+                </div>
+            </div>
+
+            <div class="form-row m-5 text-lightgreen ">
+                <div class="col">
+                    <label for="pictureDate">Дата на снимките</label>
+                    <input th:field="*{pictureDate}" th:errorclass="is-invalid" id="pictureDate" name="pictureDate" type="date" class="form-control" placeholder="Дата на снимките">
+                </div>
+                <div class="col">
+                    <label for="copyright">Copyright</label>
+                    <input id="copyright" th:value="*{copyright}" th:errorclass="bg-danger" name="copyright" minlength="2" maxlength="90" type="text" class="form-control" placeholder="Права на снимката">
+                </div>
+            </div>
+
+            <div class="form-row m-5 text-lightgreen ">
+                <div class="col">
+                    <label for="category">Category</label>
+                    <input id="category" th:value="*{category}" th:errorclass="bg-danger" name="category" type="text" class="form-control" placeholder="Категория">
+                </div>
+            </div>
+
+            <div class="form-row m-5 text-lightgreen ">
+                <div class="col">
+                    <label for="store">Магазин</label>
+                    <select name="store" id="store" class="form-control">
+                        <option value="">- Избери Магазин -</option>
+                        <option
+                                th:each="aStore: ${stores}"
+                                th:value="${aStore}"
+                                th:text="${aStore}"
+                                th:selected="${aStore} == *{store}">
+                            Магазини
+                        </option>
+                    </select>
+                    <small th:if="${#fields.hasErrors('store')}" th:errors="*{store}" id="storeError" class="form-text bg-danger rounded">You must select store</small>
+                </div>
+                <div class="col">
+                    <label for="details">Детайли</label>
+                    <input id="details" th:value="*{details}" th:errorclass="bg-danger" name="details" type="text" class="form-control" placeholder="Детайли">
+                </div>
+            </div>
+
+            <div class="form-row m-5 text-lightgreen align-items-center">
+                <div class="form-check form-check-inline pl-2">
+                    <input class="form-check-input" type="checkbox" id="nimaTested" name="nimaTested" th:checked="*{nimaTested}">
+                    <label class="form-check-label" for="nimaTested">Тестван с Нима</label>
+                </div>
+                <div class="form-check form-check-inline pl-2">
+                    <input class="form-check-input" type="checkbox" id="glutenTox" name="glutenTox" th:checked="*{glutenTox}">
+                    <label class="form-check-label" for="glutenTox">Тестван с GlutenTox</label>
+                </div>
+                <div class="form-check form-check-inline pl-2">
+                    <input class="form-check-input" type="checkbox" id="markedAsGF" name="markedAsGF" th:checked="*{markedAsGF}">
+                    <label class="form-check-label" for="markedAsGF">Отбелязан без глутен</label>
+                </div>
+                <div class="form-check form-check-inline pl-2">
+                    <input class="form-check-input" type="checkbox" id="withoutLactose" name="withoutLactose" th:checked="*{withoutLactose}">
+                    <label class="form-check-label" for="withoutLactose">Без Лактоза</label>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-center mt-4">
+                <button class="btn btn-primary btn-block w-50" type="submit">Запази</button>
+            </div>
+        </form>
+    </div>
+    </section>
+</main>
+<footer th:replace="frags/footer"></footer>
+</body>
+</html>
