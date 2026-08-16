@@ -16,8 +16,9 @@
 }
 
 footer {
-    position: absolute;
+    position: relative;
     width: 100%;
+    word-wrap: break-word;
 }
 
 .navbar {

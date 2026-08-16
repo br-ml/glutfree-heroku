@@ -5,89 +5,73 @@
 
 
 
-<nav th:fragment="navbar" class="navbar  navbar-expand-lg bg-nav rounded">
-    <p class="mb-0 d-inline-block"><a  href="/">
-        <img src="/img/Logo.png" alt="pic">
+<nav th:fragment="navbar" class="navbar navbar-expand-lg bg-nav rounded">
+    <a href="/">
+        <img src="/img/Logo.png" alt="GlutFree logo">
     </a>
-    </p>
 
     <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div sec:authorize="hasRole('ROLE_ADMIN')" class="dropdown">
-        <button class="btn btn-secondary text-darkgreen border-1 bg-white dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Admin Panel
-        </button>
-        <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item text-darkgreen" href="/store/add">Add Store</a>
-            <a class="dropdown-item text-darkgreen" href="/roles/add">Add Role to User</a>
-            <a class="dropdown-item text-darkgreen" href="/roles/delete">Delete User Role</a>
-            <a class="dropdown-item text-darkgreen" href="/users/delete">Delete User </a>
-        </div>
-    </div>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto align-items-center">
 
-
-
-
-    <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
-
-
-        <ul class="navbar-nav row">
-
-            <form th:action="@{/aboutus}" method="GET">
-                <button type="submit" class="btn btn-outline-success nav-link text-darkgreen border-1 border-darkgreen bg-white text-center active h5">
-                    За Нас
-                </button>
-            </form>
-            <li><a class="pl-2" href="https://www.facebook.com/www.glutfree.eu"><img class="p-0" src="/img/logo-fb.png" alt="pic" style="height: 40px; width: 40px;"></a></li>
-
-
-            <li class="nav-item offset-sm-12" sec:authorize="hasRole('ROLE_ADMIN')"  >
-
-                <form th:action="@{/receipt/add}" method="GET">
+            <li class="nav-item">
+                <form th:action="@{/aboutus}" method="GET">
                     <button type="submit" class="btn btn-outline-success nav-link text-darkgreen border-1 border-darkgreen bg-white text-center active h5">
-                        Добави Рецепта
-                    </button>
-                </form>
-
-            </li>
-            <li class="nav-item offset-sm-12" sec:authorize="hasRole('ROLE_ADMIN')">
-                <form th:action="@{/feedback/add}" method="GET">
-                    <button type="submit" class="btn btn-outline-success nav-link text-darkgreen border-1 border-darkgreen bg-white text-center active h5">
-                        Добави feedback
+                        За Нас
                     </button>
                 </form>
             </li>
 
-            <li class="nav-item offset-sm-12" sec:authorize="hasRole('ROLE_ADMIN')">
-                <form th:action="@{/food/add}" method="GET">
-                    <button type="submit" class="btn btn-outline-success nav-link text-darkgreen border-1 border-darkgreen bg-white text-center active h5">
-                        Добави храна
+            <li class="nav-item">
+                <a class="px-2" href="https://www.facebook.com/www.glutfree.eu">
+                    <img class="p-0" src="/img/logo-fb.png" alt="Facebook" style="height: 40px; width: 40px;">
+                </a>
+            </li>
+
+            <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
+                <div class="dropdown">
+                    <button class="btn btn-secondary text-darkgreen border-1 bg-white dropdown-toggle" type="button"
+                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Admin Panel
                     </button>
-                </form>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item text-darkgreen" href="/food/add">Добави храна</a>
+                        <a class="dropdown-item text-darkgreen" href="/receipt/add">Добави Рецепта</a>
+                        <a class="dropdown-item text-darkgreen" href="/feedback/add">Добави feedback</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item text-darkgreen" href="/store/add">Add Store</a>
+                        <a class="dropdown-item text-darkgreen" href="/roles/add">Add Role to User</a>
+                        <a class="dropdown-item text-darkgreen" href="/roles/delete">Delete User Role</a>
+                        <a class="dropdown-item text-darkgreen" href="/users/delete">Delete User</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item" sec:authorize="isAuthenticated()">
+                <div class="dropdown">
+                    <button class="btn btn-secondary text-darkgreen border-1 bg-white dropdown-toggle" type="button"
+                            id="dropdownMenuButtonProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Профил
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButtonProfile">
+                        <form th:action="@{/users/update}" method="GET">
+                            <button type="submit" class="dropdown-item text-darkgreen bg-white">
+                                Допълни профила
+                            </button>
+                        </form>
+                        <form th:action="@{/logout}" method="POST">
+                            <button type="submit" class="dropdown-item text-darkgreen bg-white">
+                                Изход
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </li>
 
         </ul>
-
-
-        <div  sec:authorize="isAuthenticated()" class="dropdown">
-            <button class="btn btn-secondary text-darkgreen border-1 bg-white dropdown-toggle" type="button" id="dropdownMenuButtonProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Профил
-            </button>
-            <div class="dropdown-menu " aria-labelledby="dropdownMenuButtonProfile">
-                <form th:action="@{/users/update}" method="GET">
-                    <button type="submit" class="btn btn-outline-success nav-link text-darkgreen border-0 bg-white text-center active h5">
-                        Допълни профила
-                    </button>
-                </form>
-                <form th:action="@{/logout}" method="POST">
-                    <button type="submit" class="btn btn-outline-success nav-link text-darkgreen border-0 bg-white text-center active h5">
-                        Изход
-                    </button>
-                </form>
-            </div>
-        </div>
     </div>
 </nav>
