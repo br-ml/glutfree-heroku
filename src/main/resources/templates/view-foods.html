@@ -10,29 +10,29 @@
 <main class="p-1 text-center my-main">
     <section class="mainadd">
         <h2 class=" py-2 text-lightgreen border-bottom border-darkgreen">Всички храни</h2>
-        <div id="container-legend" >
-            <div class="font-weight-bold h5" id="text1" style="display:inline; white-space:nowrap;">
+        <div id="container-legend" class="d-flex flex-wrap justify-content-center align-items-center" >
+            <div class="font-weight-bold h5 px-2">
                 Легенда :
             </div>
-            <div id="text2" style="display:inline; white-space:nowrap;">
+            <div class="px-1">
                 Нима :            </div>
-            <div class="pr-3" id="image2" style="display:inline;">
+            <div class="pr-3">
                 <img src="../img/nima-logo.png" alt="pic" style="height: 40px; width: 40px;">            </div>
 
-            <div id="text3" style="display:inline; white-space:nowrap;">
+            <div class="px-1">
                 Без глутен :           </div>
-            <div class="pr-3"  id="image3" style="display:inline;">
+            <div class="pr-3">
                 <img src="../img/GlutenFree-s-logo.png" alt="pic"
                      style="height: 40px; width: 40px; ">            </div>
-            <div id="text4" style="display:inline; white-space:nowrap;">
+            <div class="px-1">
                 Без лактоза :            </div>
 
-            <div class="pr-3"  id="image4" style="display:inline;">
+            <div class="pr-3">
                 <img  src="../img/LactoseFree-s-logo.png" alt="pic"
                       style="height: 40px; width: 40px;">            </div>
-            <div id="text5" style="display:inline; white-space:nowrap;">
+            <div class="px-1">
                 GToxHome :            </div>
-            <div class="pr-3"  id="image5" style="display:inline;">
+            <div class="pr-3">
                 <img  src="../img/logo-tox-sm2.png" alt="pic"
                       style="height: 40px; width: 55px;">            </div>
 
@@ -49,7 +49,7 @@
                 <a th:href="@{/food/details/{id}(id= *{id})}" >
                     <img  th:src="*{urlToPic}" class="card-img-top" alt="Open website with Google Chrome"
                      data-holder-rendered="true"
-                     style="height: 225px; width: 200px;">
+                     style="height: 225px; width: 100%; object-fit: cover;">
                 </a>
                 <div class="card-body">
                     <div class="text-center">

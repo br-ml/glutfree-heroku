@@ -21,20 +21,11 @@ footer {
 }
 
 .navbar {
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
 }
 .navbar img {
-    width: 160px;
-    padding: 0 20px
-
-
-}
-
-.navbar img {
-    width: 160px;
-    padding: 0 20px
-
-
+    width: 120px;
+    padding: 0 10px;
 }
 
 .bg-blur {
@@ -68,7 +59,7 @@ body {
     color: #d8d476;
     background-repeat: no-repeat;
     background-position: center;
-    background-attachment: fixed;
+    background-attachment: scroll;
     padding-left: 10px;
     padding-right: 10px;
 }
@@ -92,21 +83,20 @@ body {
 
 }
 .site-header h1 {
-    font-size: 45px;
+    font-size: clamp(22px, 5vw, 45px);
     color: white;
-    /*width: 35%;*/
     margin: 0;
-    padding: 60px 0 60px 60px;
+    padding: 40px 20px 40px 20px;
 }
 
 
 .site-header button {
-    font-size: 22px;
+    font-size: clamp(16px, 3vw, 22px);
     background: transparent;
     border: 2px solid white;
     color: white;
     padding: 10px 10px;
-    margin: 0 0 30px 60px;
+    margin: 0 0 30px 20px;
 }
 .site-header button:hover{
     background:#566616 ;
@@ -154,8 +144,11 @@ body {
     width: 45%;
     text-align: center;
     padding: 10px;
-    /* border:  1px solid #566616; */
+}
 
+@media (max-width: 480px) {
+    .offers li { width: 100%; }
+    .categories li { width: 100%; }
 }
 
 .offers ul {
