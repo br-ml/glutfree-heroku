@@ -100,14 +100,15 @@ public class FoodController {
 
     @GetMapping("/edit/{id}")
     public String editFood(@PathVariable Long id, Model model) {
-        FoodViewModel food = foodService.findById(id);
-        FoodEditBindingModel bindingModel = modelMapper.map(food, FoodEditBindingModel.class);
+        eu.glutfree.glutfree.model.entities.FoodEntity entity = foodService.findEntityById(id);
         if (!model.containsAttribute("foodEditBindingModel")) {
+            FoodEditBindingModel bindingModel = modelMapper.map(entity, FoodEditBindingModel.class);
+            bindingModel.setStore(entity.getStore().getName());
             model.addAttribute("foodEditBindingModel", bindingModel);
         }
         model.addAttribute("foodId", id);
-        model.addAttribute("currentImageUrl", food.getUrlToPic());
-        model.addAttribute("currentLabelImageUrl", food.getUrlToLabelImage());
+        model.addAttribute("currentImageUrl", entity.getUrlToPic());
+        model.addAttribute("currentLabelImageUrl", entity.getUrlToLabelImage());
         model.addAttribute("stores", storeService.findAllStores());
         return "edit-food";
     }
