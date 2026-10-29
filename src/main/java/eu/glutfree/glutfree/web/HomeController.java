@@ -30,4 +30,9 @@ public class HomeController {
     public String privacyPolicy() {
         return "privacy-policy";
     }
+
+    @GetMapping("/foundation")
+    public String foundation() {
+        return "foundation";
+    }
 }
